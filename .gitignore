@@ -1,0 +1,7 @@
+backend/.env
+backend/database/__pycache__
+backend/__pycache__
+backend/__init__.py
+backend/database/__init__.py
+backend/routes/__init__.py
+backend/services/__init__.py
