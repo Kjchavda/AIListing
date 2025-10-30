@@ -1,7 +1,12 @@
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
+from typing import List
+
+
 from backend.database.database import SessionLocal
 from backend import models
+from backend.schemas import ToolCreate, ToolOut
+
 
 router = APIRouter(prefix="/tools", tags=["Tools"])
 
@@ -14,15 +19,15 @@ def get_db():
         db.close()
 
 
-# ✅ 1. Get all tools
-@router.get("/")
+# Get all tools
+@router.get("/", response_model=List[ToolOut])
 def get_all_tools(db: Session = Depends(get_db)):
     tools = db.query(models.Tool).all()
     return tools
 
 
-# ✅ 2. Get tool by ID
-@router.get("/{tool_id}")
+# Get tool by ID
+@router.get("/{tool_id}", response_model=ToolOut)
 def get_tool(tool_id: int, db: Session = Depends(get_db)):
     tool = db.query(models.Tool).filter(models.Tool.id == tool_id).first()
     if not tool:
@@ -30,18 +35,18 @@ def get_tool(tool_id: int, db: Session = Depends(get_db)):
     return tool
 
 
-# ✅ 3. Create new tool
-@router.post("/")
-def create_tool(tool_data: dict, db: Session = Depends(get_db)):
-    new_tool = models.Tool(**tool_data)
+# Create new tool
+@router.post("/", response_model=ToolOut)
+def create_tool(tool_data: ToolCreate, db: Session = Depends(get_db)):
+    new_tool = models.Tool(**dict(tool_data.model_dump()))
     db.add(new_tool)
     db.commit()
     db.refresh(new_tool)
     return new_tool
 
 
-# ✅ 4. Update tool
-@router.put("/{tool_id}")
+# Update tool
+@router.put("/{tool_id}", response_model=ToolOut)
 def update_tool(tool_id: int, updated_data: dict, db: Session = Depends(get_db)):
     tool = db.query(models.Tool).filter(models.Tool.id == tool_id).first()
     if not tool:
@@ -55,8 +60,8 @@ def update_tool(tool_id: int, updated_data: dict, db: Session = Depends(get_db))
     return tool
 
 
-# ✅ 5. Delete tool
-@router.delete("/{tool_id}")
+# Delete tool
+@router.delete("/{tool_id}", status_code=status.HTTP_204_NO_CONTENT)
 def delete_tool(tool_id: int, db: Session = Depends(get_db)):
     tool = db.query(models.Tool).filter(models.Tool.id == tool_id).first()
     if not tool:

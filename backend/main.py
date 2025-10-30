@@ -6,6 +6,8 @@ from typing import Dict, Any
 from sqlalchemy import text
 import os
 
+from backend.routes.tools import router as tool_router
+
 from .database.database import engine
 from .models import Base  
 
@@ -28,6 +30,7 @@ app = FastAPI(
     lifespan=lifespan
 )
 
+app.include_router(tool_router)
 # CORS middleware
 app.add_middleware(
     CORSMiddleware,

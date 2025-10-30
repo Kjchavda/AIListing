@@ -21,7 +21,7 @@ function Header() {
       <div className="container flex items-center justify-between gap-6 py-4">
         <Link to="/" className="flex items-center gap-3">
           <span
-            className="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-amber-400 to-yellow-600 text-black font-extrabold shadow"
+            className="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-[rgba(7,7,9,1) 6.5%] to-[rgba(27,24,113,1) 93.2%] text-black font-extrabold shadow"
             aria-label="AI Toolkit logo"
           >
             AI
@@ -88,7 +88,7 @@ const App = () => (
       <Toaster />
       <Sonner />
       <div className="relative min-h-screen">
-        <div className="pointer-events-none fixed inset-0 -z-10 bg-[radial-gradient(1200px_600px_at_20%_0%,hsla(45,95%,50%,0.12),transparent),radial-gradient(800px_400px_at_90%_120%,hsla(30,90%,45%,0.08),transparent)]" />
+        <div className="pointer-events-none fixed inset-0 -z-10 bg-[ radial-gradient( 111.4deg,  rgba(7,7,9,1) 6.5%, rgba(27,24,113,1) 93.2% )]" />
         <BrowserRouter>
           <Header />
           <Routes>

@@ -121,7 +121,7 @@ export default function HomePage() {
                 />
                 <button
                   onClick={() => {}}
-                  className="px-6 py-3 rounded-full text-sm font-semibold text-white bg-gradient-to-r from-purple-500 via-fuchsia-500 to-amber-400 hover:opacity-90 transition-opacity"
+                  className="px-6 py-3 rounded-full text-sm font-semibold text-white bg-gradient-to-r from-[#370361] to-[#0b8793] hover:opacity-90 transition-opacity"
                 >
                   Search
                 </button>
