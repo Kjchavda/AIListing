@@ -7,6 +7,8 @@ from sqlalchemy import text
 import os
 
 from backend.routes.tools import router as tool_router
+from backend.routes.categories import router as category_router
+
 
 from .database.database import engine
 from .models import Base  
@@ -31,6 +33,7 @@ app = FastAPI(
 )
 
 app.include_router(tool_router)
+app.include_router(category_router)
 # CORS middleware
 app.add_middleware(
     CORSMiddleware,

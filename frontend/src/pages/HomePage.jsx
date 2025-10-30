@@ -1,59 +1,9 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { categoriesAPI, toolsAPI } from "../services/api";
 
-const categories = ["All", "Writing", "Design", "Marketing", "Productivity", "Research"];
 
-const seedTools = [
-  {
-    title: "AI Writer",
-    description: "Generate high-quality content effortlessly.",
-    category: "Writing",
-    color: "from-emerald-400 to-teal-700",
-  },
-  {
-    title: "AI Image Generator",
-    description: "Create stunning visuals with AI.",
-    category: "Design",
-    color: "from-cyan-300 to-sky-700",
-  },
-  {
-    title: "AI Social Media Manager",
-    description: "Automate your social media tasks.",
-    category: "Marketing",
-    color: "from-indigo-300 to-violet-700",
-  },
-  {
-    title: "AI Research Assistant",
-    description: "Streamline your research process.",
-    category: "Research",
-    color: "from-teal-400 to-emerald-800",
-  },
-  {
-    title: "AI Presentation Tool",
-    description: "Design impactful presentations.",
-    category: "Productivity",
-    color: "from-amber-300 to-yellow-700",
-  },
-  {
-    title: "AI Code Generator",
-    description: "Write code faster and smarter.",
-    category: "Productivity",
-    color: "from-rose-300 to-pink-700",
-  },
-  {
-    title: "AI Meeting Summarizer",
-    description: "Summarize meetings efficiently.",
-    category: "Productivity",
-    color: "from-fuchsia-300 to-purple-700",
-  },
-  {
-    title: "AI Email Assistant",
-    description: "Manage your inbox with AI.",
-    category: "Writing",
-    color: "from-green-300 to-emerald-700",
-  },
-];
 
-function CategoryPill({ label, active, onClick }) {
+function CategoryPill({ label, active, onClick,count }) {
   return (
     <button
       onClick={onClick}
@@ -63,39 +13,146 @@ function CategoryPill({ label, active, onClick }) {
           : "bg-card/40 text-muted-foreground hover:text-foreground hover:bg-card"
       }`}
     >
-      {label}
+      {label} {count !== undefined && <span className="opacity-60">({count})</span>}
     </button>
   );
 }
 
 function ToolCard({ tool }) {
+  // Map pricing types to colors
+  const pricingColors = {
+    free: "from-green-500 to-emerald-500",
+    freemium: "from-blue-500 to-cyan-500",
+    paid: "from-purple-500 to-pink-500",
+    contact_us: "from-orange-500 to-red-500",
+  };
+
+  const gradientColor = pricingColors[tool.pricing_type] || "from-gray-500 to-gray-700";
+
+  // Format pricing type for display
+  const pricingDisplay = {
+    free: "Free",
+    freemium: "Freemium",
+    paid: "Paid",
+    contact_us: "Contact Us",
+  };
+
   return (
-    <div className="group rounded-2xl border border-white/5 bg-card/60 backdrop-blur-sm shadow-xl shadow-black/20 hover:shadow-black/30 transition-shadow overflow-hidden">
-      <div className={`h-40 w-full bg-gradient-to-br ${tool.color} opacity-90`} />
+    <div
+      className="group relative block rounded-2xl border border-white/5 bg-card/60 backdrop-blur-sm shadow-xl shadow-black/20 hover:shadow-black/30 transition-all hover:scale-[1.02] overflow-hidden"
+    >
+      {/* Logo/Header section */}
+      <div className={`h-40 w-full bg-gradient-to-br ${gradientColor} opacity-90 flex items-center justify-center`}>
+        {tool.logo_url ? (
+          <img 
+            src={tool.logo_url} 
+            alt={`${tool.name} logo`}
+            className="w-20 h-20 object-contain rounded-xl bg-white/10 p-2"
+            onError={(e) => {
+              e.target.style.display = 'none';
+            }}
+          />
+        ) : (
+          <span className="text-4xl font-bold text-white/90">{tool.name[0]}</span>
+        )}
+      </div>
+
+      {/* Content section */}
       <div className="p-5">
-        <div className="flex items-center justify-between">
-          <h3 className="text-lg font-semibold tracking-tight">{tool.title}</h3>
-          <span className="text-xs px-2 py-1 rounded-full bg-primary/20 text-primary">{tool.category}</span>
+        <div className="flex items-start justify-between gap-2">
+          <h3 className="text-lg font-semibold tracking-tight flex-1">{tool.name}</h3>
+          <a
+              href={tool.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="static" // Reset position for the link text
+            >
+              {tool.name}
+              
+              {/* This is the "stretched link" magic */}
+              <span 
+                className="absolute inset-0" 
+                aria-hidden="true"
+              />
+            </a>
         </div>
-        <p className="mt-2 text-sm text-muted-foreground">{tool.description}</p>
+        
+        <p className="mt-2 text-sm text-muted-foreground line-clamp-2">
+          {tool.description}
+        </p>
+
+        {/* Categories */}
+        {tool.categories && tool.categories.length > 0 && (
+          <div className="mt-3 flex flex-wrap gap-1">
+            {tool.categories.slice(0, 2).map((cat) => (
+              <span 
+                key={cat.id}
+                className="text-xs px-2 py-0.5 rounded-md bg-muted/50 text-muted-foreground z-10"
+              >
+                {cat.name}
+              </span>
+            ))}
+            {tool.categories.length > 2 && (
+              <span className="text-xs px-2 py-0.5 text-muted-foreground">
+                +{tool.categories.length - 2}
+              </span>
+            )}
+          </div>
+        )}
       </div>
     </div>
   );
 }
-
 export default function HomePage() {
   const [query, setQuery] = useState("");
-  const [activeCat, setActiveCat] = useState("All");
+  const [activeCat, setActiveCat] = useState(null);
+  const [tools, setTools] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  const tools = seedTools;
+  // Fetch categories on mount
+  useEffect(() => {
+    async function fetchCategories() {
+      try {
+        const response = await categoriesAPI.getAll();
+        setCategories(response.data);
+      } catch (err) {
+        console.error("Error fetching categories:", err);
+        setError("Failed to load categories");
+      }
+    }
+    fetchCategories();
+  }, []);
 
-  const filtered = useMemo(() => {
-    return tools.filter((t) => {
-      const inCat = activeCat === "All" || t.category === activeCat;
-      const matches = `${t.title} ${t.description}`.toLowerCase().includes(query.toLowerCase());
-      return inCat && matches;
-    });
-  }, [query, activeCat, tools]);
+  // Fetch tools whenever category or search changes
+  useEffect(() => {
+    async function fetchTools() {
+      setLoading(true);
+      try {
+        const params = {};
+        if (activeCat) {
+          params.category_id = activeCat;
+        }
+        if (query.trim()) {
+          params.search = query.trim();
+        }
+
+        const response = await toolsAPI.getAll(params);
+        setTools(response.data);
+        setError(null);
+      } catch (err) {
+        console.error("Error fetching tools:", err);
+        setError("Failed to load tools");
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    // Debounce search
+    const timeoutId = setTimeout(fetchTools, 300);
+    return () => clearTimeout(timeoutId);
+  }, [activeCat, query]);
 
   return (
     <main className="relative">
@@ -116,7 +173,7 @@ export default function HomePage() {
                 <input
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
-                  placeholder="Search for tools like 'Image Generation'"
+                  placeholder="Search for tools like 'video editing' or 'ChatGPT'"
                   className="flex-1 bg-transparent px-4 py-3 text-sm outline-none placeholder:text-muted-foreground"
                 />
                 <button
@@ -129,22 +186,74 @@ export default function HomePage() {
             </div>
           </div>
 
+          {/* Categories Filter */}
           <div className="mt-10 md:mt-12">
             <div className="flex items-center gap-3 overflow-x-auto no-scrollbar rounded-2xl border border-white/10 bg-card/40 p-2">
-              {categories.map((c) => (
-                <CategoryPill key={c} label={c} active={c === activeCat} onClick={() => setActiveCat(c)} />
+              <CategoryPill
+                label="All"
+                active={activeCat === null}
+                onClick={() => setActiveCat(null)}
+              />
+              {categories.map((cat) => (
+                <CategoryPill
+                  key={cat.id}
+                  label={cat.name}
+                  active={cat.id === activeCat}
+                  onClick={() => setActiveCat(cat.id)}
+                  count={cat.tool_count}
+                />
               ))}
             </div>
           </div>
 
-          <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-            {filtered.map((tool) => (
-              <ToolCard key={`${tool.title}-${tool.category}`} tool={tool} />)
-            )}
-            {filtered.length === 0 && (
-              <p className="text-muted-foreground col-span-full text-center py-12">No tools found. Try a different search.</p>
-            )}
-          </div>
+          {/* Error State */}
+          {error && (
+            <div className="mt-8 text-center">
+              <p className="text-red-500">{error}</p>
+              <button 
+                onClick={() => window.location.reload()}
+                className="mt-2 text-sm text-muted-foreground hover:text-foreground"
+              >
+                Try again
+              </button>
+            </div>
+          )}
+
+          {/* Loading State */}
+          {loading && (
+            <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+              {[...Array(8)].map((_, i) => (
+                <div
+                  key={i}
+                  className="rounded-2xl border border-white/5 bg-card/60 overflow-hidden animate-pulse"
+                >
+                  <div className="h-40 w-full bg-muted/20" />
+                  <div className="p-5 space-y-3">
+                    <div className="h-4 bg-muted/20 rounded w-3/4" />
+                    <div className="h-3 bg-muted/20 rounded w-full" />
+                    <div className="h-3 bg-muted/20 rounded w-5/6" />
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {/* Tools Grid */}
+          {!loading && (
+            <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+              {tools.map((tool) => (
+                <ToolCard key={tool.id} tool={tool} />
+              ))}
+              {tools.length === 0 && (
+                <div className="col-span-full text-center py-12">
+                  <p className="text-muted-foreground text-lg">No tools found.</p>
+                  <p className="text-sm text-muted-foreground mt-2">
+                    Try a different search or category.
+                  </p>
+                </div>
+              )}
+            </div>
+          )}
         </div>
       </section>
     </main>
