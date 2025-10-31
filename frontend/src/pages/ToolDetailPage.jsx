@@ -100,12 +100,12 @@ export default function ToolDetailPage() {
   const gradientColor = pricingColors[tool.pricing_type] || "from-gray-500 to-gray-700";
 
   return (
-    <main className="pt-24 pb-16">
-      <div className="container max-w-5xl">
+    <main className="pt-24 pb-8">
+      <div className="container pr-4 pl-4 max-w-5xl">
         {/* Back Button */}
         <button
           onClick={() => navigate(-1)}
-          className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors mb-8"
+          className="flex items-center gap-2 text-lg text-muted-foreground hover:text-foreground transition-colors mb-8"
         >
           <ArrowLeft className="w-4 h-4" />
           Back
@@ -207,7 +207,7 @@ export default function ToolDetailPage() {
                   {tool.categories.map((cat) => (
                     <Link
                       key={cat.id}
-                      to={`/tools?category=${cat.id}`}
+                      to={`/?category_id=${cat.id}`}
                       className="px-4 py-2 rounded-full border border-white/10 bg-card/40 hover:bg-card/60 text-sm transition-colors"
                     >
                       {cat.name}

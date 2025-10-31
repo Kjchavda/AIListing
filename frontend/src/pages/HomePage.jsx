@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { categoriesAPI, toolsAPI } from "../services/api";
 
-import { Link } from 'react-router-dom';
+import { Link , useSearchParams} from 'react-router-dom';
 
 function CategoryPill({ label, active, onClick,count }) {
   return (
@@ -93,12 +93,42 @@ function ToolCard({ tool }) {
 }
 
 export default function HomePage() {
+  const [searchParams, setSearchParams] = useSearchParams();
   const [query, setQuery] = useState("");
-  const [activeCat, setActiveCat] = useState(null);
+  const [activeCat, setActiveCat] = useState(()=>{
+    const catIdfromParams = searchParams.get('category_id');
+    if(!catIdfromParams){
+      return null;
+    }
+    const initialCat = parseInt(catIdfromParams, 10);
+
+    return !isNaN(initialCat) ? initialCat : null;
+  });
   const [tools, setTools] = useState([]);
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
+  //handling URL param changes
+  const handleCategoryChange = (newCatId) => {
+    // 1. Update the state (this triggers the useEffect to re-fetch tools)
+    setActiveCat(newCatId);
+
+    // 2. Update the URL
+    if (newCatId === null) {
+      // If "All" is clicked, remove the 'category_id' param
+      setSearchParams(prev => {
+        prev.delete('category_id');
+        return prev;
+      });
+    } else {
+      // If a specific category is clicked, set the param
+      setSearchParams(prev => {
+        prev.set('category_id', newCatId);
+        return prev;
+      });
+    }
+  };
 
   // Fetch categories on mount
   useEffect(() => {
@@ -181,14 +211,14 @@ export default function HomePage() {
               <CategoryPill
                 label="All"
                 active={activeCat === null}
-                onClick={() => setActiveCat(null)}
+                onClick={() => handleCategoryChange(null)}
               />
               {categories.map((cat) => (
                 <CategoryPill
                   key={cat.id}
                   label={cat.name}
                   active={cat.id === activeCat}
-                  onClick={() => setActiveCat(cat.id)}
+                  onClick={() => handleCategoryChange(cat.id)}
                   count={cat.tool_count}
                 />
               ))}
