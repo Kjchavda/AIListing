@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { categoriesAPI, toolsAPI } from "../services/api";
 
-
+import { Link } from 'react-router-dom';
 
 function CategoryPill({ label, active, onClick,count }) {
   return (
@@ -19,7 +19,6 @@ function CategoryPill({ label, active, onClick,count }) {
 }
 
 function ToolCard({ tool }) {
-  // Map pricing types to colors
   const pricingColors = {
     free: "from-green-500 to-emerald-500",
     freemium: "from-blue-500 to-cyan-500",
@@ -29,7 +28,6 @@ function ToolCard({ tool }) {
 
   const gradientColor = pricingColors[tool.pricing_type] || "from-gray-500 to-gray-700";
 
-  // Format pricing type for display
   const pricingDisplay = {
     free: "Free",
     freemium: "Freemium",
@@ -38,8 +36,9 @@ function ToolCard({ tool }) {
   };
 
   return (
-    <div
-      className="group relative block rounded-2xl border border-white/5 bg-card/60 backdrop-blur-sm shadow-xl shadow-black/20 hover:shadow-black/30 transition-all hover:scale-[1.02] overflow-hidden"
+    <Link
+      to={`/tools/${tool.id}`}
+      className="group block rounded-2xl border border-white/5 bg-card/60 backdrop-blur-sm shadow-xl shadow-black/20 hover:shadow-black/30 transition-all hover:scale-[1.02] overflow-hidden"
     >
       {/* Logo/Header section */}
       <div className={`h-40 w-full bg-gradient-to-br ${gradientColor} opacity-90 flex items-center justify-center`}>
@@ -61,20 +60,9 @@ function ToolCard({ tool }) {
       <div className="p-5">
         <div className="flex items-start justify-between gap-2">
           <h3 className="text-lg font-semibold tracking-tight flex-1">{tool.name}</h3>
-          <a
-              href={tool.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="static" // Reset position for the link text
-            >
-              {tool.name}
-              
-              {/* This is the "stretched link" magic */}
-              <span 
-                className="absolute inset-0" 
-                aria-hidden="true"
-              />
-            </a>
+          <span className="text-xs px-2 py-1 rounded-full bg-primary/20 text-primary whitespace-nowrap">
+            {pricingDisplay[tool.pricing_type]}
+          </span>
         </div>
         
         <p className="mt-2 text-sm text-muted-foreground line-clamp-2">
@@ -87,7 +75,7 @@ function ToolCard({ tool }) {
             {tool.categories.slice(0, 2).map((cat) => (
               <span 
                 key={cat.id}
-                className="text-xs px-2 py-0.5 rounded-md bg-muted/50 text-muted-foreground z-10"
+                className="text-xs px-2 py-0.5 rounded-md bg-muted/50 text-muted-foreground"
               >
                 {cat.name}
               </span>
@@ -100,9 +88,10 @@ function ToolCard({ tool }) {
           </div>
         )}
       </div>
-    </div>
+    </Link>
   );
 }
+
 export default function HomePage() {
   const [query, setQuery] = useState("");
   const [activeCat, setActiveCat] = useState(null);

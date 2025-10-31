@@ -7,6 +7,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Link, NavLink } from "react-router-dom";
 import HomePage from "./pages/HomePage";
+import ToolDetailPage from "./pages/ToolDetailPage";
 import Placeholder from "./pages/Placeholder";
 import NotFound from "./pages/NotFound";
 
@@ -17,11 +18,11 @@ function Header() {
   const inactive = "text-muted-foreground hover:text-foreground";
   const active = "text-foreground bg-card/90";
   return (
-      <header className="fixed top-0 inset-x-0 z-50 border-b border-white/10 bg-background/50 backdrop-blur-sm">
+    <header className="fixed top-0 inset-x-0 z-50 border-b border-white/10 bg-background/50 backdrop-blur-sm">
       <div className="container flex items-center justify-between gap-6 py-4">
         <Link to="/" className="flex items-center gap-3">
           <span
-            className="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-[rgba(7,7,9,1) 6.5%] to-[rgba(27,24,113,1) 93.2%] text-black font-extrabold shadow"
+            className="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-[rgba(7,7,9,1)_6.5%] to-[rgba(27,24,113,1)_93.2%] text-white font-extrabold shadow"
             aria-label="AI Toolkit logo"
           >
             AI
@@ -88,11 +89,12 @@ const App = () => (
       <Toaster />
       <Sonner />
       <div className="relative min-h-screen">
-        <div className="pointer-events-none fixed inset-0 -z-10 bg-[ radial-gradient( 111.4deg,  rgba(7,7,9,1) 6.5%, rgba(27,24,113,1) 93.2% )]" />
+        <div className="pointer-events-none fixed inset-0 -z-10 bg-[radial-gradient(111.4deg,_rgba(7,7,9,1)_6.5%,_rgba(27,24,113,1)_93.2%)]" />
         <BrowserRouter>
           <Header />
           <Routes>
             <Route path="/" element={<HomePage />} />
+            <Route path="/tools/:id" element={<ToolDetailPage />} />
             <Route path="/categories" element={<Placeholder />} />
             <Route path="/pricing" element={<Placeholder />} />
             <Route path="/blog" element={<Placeholder />} />
