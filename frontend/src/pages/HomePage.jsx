@@ -101,9 +101,9 @@ export default function HomePage() {
       return null;
     }
     const initialCat = parseInt(catIdfromParams, 10);
-
     return !isNaN(initialCat) ? initialCat : null;
   });
+
   const [tools, setTools] = useState([]);
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
