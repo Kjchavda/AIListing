@@ -35,6 +35,8 @@ class ToolBase(BaseModel):
     link: str
     logo_url: Optional[str] = None
     pricing_type: PricingType = PricingType.free
+    is_approved: bool
+    user_id: str
 
 class ToolCreate(ToolBase):
     category_ids: List[int] = []  # Add category IDs

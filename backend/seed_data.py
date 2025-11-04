@@ -48,7 +48,9 @@ def create_tools(db: Session, categories):
             "link": "https://chat.openai.com",
             "logo_url": "https://cdn.oaistatic.com/_next/static/media/apple-touch-icon.59f2e898.png",
             "pricing_type": "freemium",
-            "categories": ["Writing & Content", "Chatbots & Assistants", "Code & Development"]
+            "categories": ["Writing & Content", "Chatbots & Assistants", "Code & Development"],
+            "is_approved":True,
+            "user_id":"seed_user_placeholder"
         },
         {
             "name": "Midjourney",
@@ -56,7 +58,9 @@ def create_tools(db: Session, categories):
             "link": "https://www.midjourney.com",
             "logo_url": "https://www.midjourney.com/apple-touch-icon.png",
             "pricing_type": "paid",
-            "categories": ["Image Generation", "Design & UI/UX"]
+            "categories": ["Image Generation", "Design & UI/UX"],
+            "is_approved":True,
+            "user_id":"seed_user_placeholder"
         },
         {
             "name": "GitHub Copilot",
@@ -64,7 +68,9 @@ def create_tools(db: Session, categories):
             "link": "https://github.com/features/copilot",
             "logo_url": "https://github.githubassets.com/assets/apple-touch-icon-144x144-b882e354c005.png",
             "pricing_type": "paid",
-            "categories": ["Code & Development"]
+            "categories": ["Code & Development"],
+            "is_approved":True,
+            "user_id":"seed_user_placeholder"
         },
         {
             "name": "Jasper AI",
@@ -72,7 +78,9 @@ def create_tools(db: Session, categories):
             "link": "https://www.jasper.ai",
             "logo_url": "https://www.jasper.ai/favicon.ico",
             "pricing_type": "paid",
-            "categories": ["Writing & Content", "Marketing & SEO"]
+            "categories": ["Writing & Content", "Marketing & SEO"],
+            "is_approved":True,
+            "user_id":"seed_user_placeholder"
         },
         {
             "name": "DALL-E 3",
@@ -80,7 +88,9 @@ def create_tools(db: Session, categories):
             "link": "https://openai.com/dall-e-3",
             "logo_url": "https://openai.com/favicon.ico",
             "pricing_type": "freemium",
-            "categories": ["Image Generation", "Design & UI/UX"]
+            "categories": ["Image Generation", "Design & UI/UX"],
+            "is_approved":True,
+            "user_id":"seed_user_placeholder"
         },
         {
             "name": "Runway",
@@ -88,7 +98,9 @@ def create_tools(db: Session, categories):
             "link": "https://runwayml.com",
             "logo_url": "https://runwayml.com/favicon.ico",
             "pricing_type": "freemium",
-            "categories": ["Video & Animation", "Image Generation"]
+            "categories": ["Video & Animation", "Image Generation"],
+            "is_approved":True,
+            "user_id":"seed_user_placeholder"
         },
         {
             "name": "Notion AI",
@@ -96,7 +108,9 @@ def create_tools(db: Session, categories):
             "link": "https://www.notion.so/product/ai",
             "logo_url": "https://www.notion.so/front-static/favicon.ico",
             "pricing_type": "paid",
-            "categories": ["Writing & Content", "Productivity"]
+            "categories": ["Writing & Content", "Productivity"],
+            "is_approved":True,
+            "user_id":"seed_user_placeholder"
         },
         {
             "name": "ElevenLabs",
@@ -104,7 +118,9 @@ def create_tools(db: Session, categories):
             "link": "https://elevenlabs.io",
             "logo_url": "https://elevenlabs.io/favicon.ico",
             "pricing_type": "freemium",
-            "categories": ["Audio & Music"]
+            "categories": ["Audio & Music"],
+            "is_approved":True,
+            "user_id":"seed_user_placeholder"
         },
         {
             "name": "Perplexity AI",
@@ -112,7 +128,9 @@ def create_tools(db: Session, categories):
             "link": "https://www.perplexity.ai",
             "logo_url": "https://www.perplexity.ai/favicon.ico",
             "pricing_type": "freemium",
-            "categories": ["Research & Data", "Chatbots & Assistants"]
+            "categories": ["Research & Data", "Chatbots & Assistants"],
+            "is_approved":True,
+            "user_id":"seed_user_placeholder"
         },
         {
             "name": "Copy.ai",
@@ -120,7 +138,9 @@ def create_tools(db: Session, categories):
             "link": "https://www.copy.ai",
             "logo_url": "https://www.copy.ai/favicon.ico",
             "pricing_type": "freemium",
-            "categories": ["Writing & Content", "Marketing & SEO"]
+            "categories": ["Writing & Content", "Marketing & SEO"],
+            "is_approved":True,
+            "user_id":"seed_user_placeholder"
         },
         {
             "name": "Synthesia",
@@ -128,7 +148,9 @@ def create_tools(db: Session, categories):
             "link": "https://www.synthesia.io",
             "logo_url": "https://www.synthesia.io/favicon.ico",
             "pricing_type": "paid",
-            "categories": ["Video & Animation", "Marketing & SEO"]
+            "categories": ["Video & Animation", "Marketing & SEO"],
+            "is_approved":True,
+            "user_id":"seed_user_placeholder"
         },
         {
             "name": "Claude",
@@ -136,7 +158,9 @@ def create_tools(db: Session, categories):
             "link": "https://claude.ai",
             "logo_url": "https://claude.ai/favicon.ico",
             "pricing_type": "freemium",
-            "categories": ["Writing & Content", "Chatbots & Assistants", "Code & Development"]
+            "categories": ["Writing & Content", "Chatbots & Assistants", "Code & Development"],
+            "is_approved":True,
+            "user_id":"seed_user_placeholder"
         },
         {
             "name": "Canva AI",
@@ -144,7 +168,9 @@ def create_tools(db: Session, categories):
             "link": "https://www.canva.com/ai-image-generator/",
             "logo_url": "https://www.canva.com/favicon.ico",
             "pricing_type": "freemium",
-            "categories": ["Design & UI/UX", "Image Generation"]
+            "categories": ["Design & UI/UX", "Image Generation"],
+            "is_approved":True,
+            "user_id":"seed_user_placeholder"
         },
         {
             "name": "Grammarly",
@@ -152,7 +178,9 @@ def create_tools(db: Session, categories):
             "link": "https://www.grammarly.com",
             "logo_url": "https://www.grammarly.com/favicon.ico",
             "pricing_type": "freemium",
-            "categories": ["Writing & Content", "Productivity"]
+            "categories": ["Writing & Content", "Productivity"],
+            "is_approved":True,
+            "user_id":"seed_user_placeholder"
         },
         {
             "name": "Stable Diffusion",
@@ -160,7 +188,9 @@ def create_tools(db: Session, categories):
             "link": "https://stability.ai/stable-diffusion",
             "logo_url": "https://stability.ai/favicon.ico",
             "pricing_type": "free",
-            "categories": ["Image Generation"]
+            "categories": ["Image Generation"],
+            "is_approved":True,
+            "user_id":"seed_user_placeholder"
         },
         {
             "name": "Cursor",
@@ -168,7 +198,9 @@ def create_tools(db: Session, categories):
             "link": "https://cursor.sh",
             "logo_url": "https://cursor.sh/favicon.ico",
             "pricing_type": "freemium",
-            "categories": ["Code & Development"]
+            "categories": ["Code & Development"],
+            "is_approved":True,
+            "user_id":"seed_user_placeholder"
         },
         {
             "name": "Suno AI",
@@ -176,7 +208,9 @@ def create_tools(db: Session, categories):
             "link": "https://www.suno.ai",
             "logo_url": "https://www.suno.ai/favicon.ico",
             "pricing_type": "freemium",
-            "categories": ["Audio & Music"]
+            "categories": ["Audio & Music"],
+            "is_approved":True,
+            "user_id":"seed_user_placeholder"
         },
         {
             "name": "Gamma",
@@ -184,7 +218,9 @@ def create_tools(db: Session, categories):
             "link": "https://gamma.app",
             "logo_url": "https://gamma.app/favicon.ico",
             "pricing_type": "freemium",
-            "categories": ["Productivity", "Design & UI/UX"]
+            "categories": ["Productivity", "Design & UI/UX"],
+            "is_approved":True,
+            "user_id":"seed_user_placeholder"
         },
         {
             "name": "Microsoft Designer",
@@ -192,7 +228,9 @@ def create_tools(db: Session, categories):
             "link": "https://designer.microsoft.com",
             "logo_url": "https://designer.microsoft.com/favicon.ico",
             "pricing_type": "free",
-            "categories": ["Design & UI/UX", "Image Generation"]
+            "categories": ["Design & UI/UX", "Image Generation"],
+            "is_approved":True,
+            "user_id":"seed_user_placeholder"
         },
         {
             "name": "Zapier AI",
@@ -200,7 +238,9 @@ def create_tools(db: Session, categories):
             "link": "https://zapier.com/ai",
             "logo_url": "https://zapier.com/favicon.ico",
             "pricing_type": "freemium",
-            "categories": ["Productivity", "Business & Analytics"]
+            "categories": ["Productivity", "Business & Analytics"],
+            "is_approved":True,
+            "user_id":"seed_user_placeholder"
         },
         {
             "name": "Framer AI",
@@ -208,7 +248,9 @@ def create_tools(db: Session, categories):
             "link": "https://www.framer.com/ai",
             "logo_url": "https://www.framer.com/favicon.ico",
             "pricing_type": "freemium",
-            "categories": ["Design & UI/UX", "Code & Development"]
+            "categories": ["Design & UI/UX", "Code & Development"],
+            "is_approved":True,
+            "user_id":"seed_user_placeholder"
         },
         {
             "name": "Pictory",
@@ -216,7 +258,9 @@ def create_tools(db: Session, categories):
             "link": "https://pictory.ai",
             "logo_url": "https://pictory.ai/favicon.ico",
             "pricing_type": "paid",
-            "categories": ["Video & Animation", "Marketing & SEO"]
+            "categories": ["Video & Animation", "Marketing & SEO"],
+            "is_approved":True,
+            "user_id":"seed_user_placeholder"
         },
         {
             "name": "Descript",
@@ -224,7 +268,9 @@ def create_tools(db: Session, categories):
             "link": "https://www.descript.com",
             "logo_url": "https://www.descript.com/favicon.ico",
             "pricing_type": "freemium",
-            "categories": ["Video & Animation", "Audio & Music"]
+            "categories": ["Video & Animation", "Audio & Music"],
+            "is_approved":True,
+            "user_id":"seed_user_placeholder"
         },
         {
             "name": "Otter.ai",
@@ -232,7 +278,9 @@ def create_tools(db: Session, categories):
             "link": "https://otter.ai",
             "logo_url": "https://otter.ai/favicon.ico",
             "pricing_type": "freemium",
-            "categories": ["Productivity", "Audio & Music"]
+            "categories": ["Productivity", "Audio & Music"],
+            "is_approved":True,
+            "user_id":"seed_user_placeholder"
         },
         {
             "name": "Anthropic Claude",
@@ -240,7 +288,9 @@ def create_tools(db: Session, categories):
             "link": "https://www.anthropic.com/claude",
             "logo_url": "https://www.anthropic.com/favicon.ico",
             "pricing_type": "freemium",
-            "categories": ["Chatbots & Assistants", "Code & Development", "Research & Data"]
+            "categories": ["Chatbots & Assistants", "Code & Development", "Research & Data"],
+            "is_approved":True,
+            "user_id":"seed_user_placeholder"
         },
         {
             "name": "Luma AI",
@@ -248,7 +298,9 @@ def create_tools(db: Session, categories):
             "link": "https://lumalabs.ai",
             "logo_url": "https://lumalabs.ai/favicon.ico",
             "pricing_type": "freemium",
-            "categories": ["3D & Gaming", "Video & Animation"]
+            "categories": ["3D & Gaming", "Video & Animation"],
+            "is_approved":True,
+            "user_id":"seed_user_placeholder"
         },
         {
             "name": "Replit AI",
@@ -256,7 +308,9 @@ def create_tools(db: Session, categories):
             "link": "https://replit.com/ai",
             "logo_url": "https://replit.com/favicon.ico",
             "pricing_type": "freemium",
-            "categories": ["Code & Development"]
+            "categories": ["Code & Development"],
+            "is_approved":True,
+            "user_id":"seed_user_placeholder"
         },
         {
             "name": "HubSpot AI",
@@ -264,7 +318,9 @@ def create_tools(db: Session, categories):
             "link": "https://www.hubspot.com/artificial-intelligence",
             "logo_url": "https://www.hubspot.com/favicon.ico",
             "pricing_type": "freemium",
-            "categories": ["Marketing & SEO", "Business & Analytics"]
+            "categories": ["Marketing & SEO", "Business & Analytics"],
+            "is_approved":True,
+            "user_id":"seed_user_placeholder"
         },
         {
             "name": "Beautiful.ai",
@@ -272,7 +328,9 @@ def create_tools(db: Session, categories):
             "link": "https://www.beautiful.ai",
             "logo_url": "https://www.beautiful.ai/favicon.ico",
             "pricing_type": "freemium",
-            "categories": ["Productivity", "Design & UI/UX"]
+            "categories": ["Productivity", "Design & UI/UX"],
+            "is_approved":True,
+            "user_id":"seed_user_placeholder"
         },
         {
             "name": "Krisp",
@@ -280,7 +338,9 @@ def create_tools(db: Session, categories):
             "link": "https://krisp.ai",
             "logo_url": "https://krisp.ai/favicon.ico",
             "pricing_type": "freemium",
-            "categories": ["Audio & Music", "Productivity"]
+            "categories": ["Audio & Music", "Productivity"],
+            "is_approved":True,
+            "user_id":"seed_user_placeholder"
         }
     ]
     
@@ -302,7 +362,9 @@ def create_tools(db: Session, categories):
             link=tool_data["link"],
             logo_url=tool_data["logo_url"],
             pricing_type=tool_data["pricing_type"],
-            categories=tool_categories
+            categories=tool_categories,
+            is_approved=tool_data["is_approved"],
+            user_id=tool_data["user_id"]
         )
         
         db.add(tool)

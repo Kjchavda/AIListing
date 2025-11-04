@@ -14,6 +14,7 @@ import NotFound from "./pages/NotFound";
 import { StrictMode } from "react";
 import SignInPage from "./pages/SignInPage";
 import SignUpPage from "./pages/SignUpPage";
+import SubmitToolPage from "./pages/SubmitToolPage";
 
 const queryClient = new QueryClient();
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY
@@ -132,6 +133,8 @@ const App = () => (
               <Route path="/" element={<HomePage />} />
               <Route path="/tools/:id" element={<ToolDetailPage />} />
               <Route path="/categories" element={<Placeholder />} />
+              <Route path="/submit-tool" element={<SubmitToolPage />} />
+
               <Route path="/pricing" element={<Placeholder />} />
               <Route path="/blog" element={<Placeholder />} />
               <Route path="/get-started" element={<Placeholder />} />

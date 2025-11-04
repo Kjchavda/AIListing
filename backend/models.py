@@ -24,6 +24,8 @@ class Tool(Base):
     logo_url = Column(String) # Essential for a visually appealing list
     pricing_type = Column(Enum('free', 'freemium', 'paid', 'contact_us', name='pricing_type_enum'), default='free')
     date_added = Column(DateTime, default=datetime.utcnow)
+    is_approved = Column(Boolean, default=False, nullable=False)
+    user_id = Column(String, index=True, nullable=False)
     # Relationship to categories
     categories = relationship("Category", secondary=tool_category_association, back_populates="tools")
 
