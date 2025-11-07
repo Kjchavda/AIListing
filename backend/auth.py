@@ -9,7 +9,7 @@ from typing import Any, Dict
 # --- Configuration ---
 
 # This is the URL you copied from your Clerk Dashboard
-CLERK_ISSUER_URL = "YOUR_CLERK_ISSUER_URL" 
+CLERK_ISSUER_URL = "https://moving-cougar-76.clerk.accounts.dev" 
 
 # This is where Clerk's public keys are found
 JWKS_URL = f"{CLERK_ISSUER_URL}/.well-known/jwks.json"

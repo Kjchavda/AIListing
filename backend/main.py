@@ -8,6 +8,7 @@ import os
 
 from backend.routes.tools import router as tool_router
 from backend.routes.categories import router as category_router
+from backend.routes.admin import router as admin_router
 
 
 from .database.database import engine
@@ -34,6 +35,8 @@ app = FastAPI(
 
 app.include_router(tool_router)
 app.include_router(category_router)
+app.include_router(admin_router)
+
 # CORS middleware
 app.add_middleware(
     CORSMiddleware,

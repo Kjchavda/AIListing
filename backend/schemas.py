@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, HttpUrl
 from typing import Optional, List
 from datetime import datetime
 from enum import Enum
@@ -35,11 +35,19 @@ class ToolBase(BaseModel):
     link: str
     logo_url: Optional[str] = None
     pricing_type: PricingType = PricingType.free
-    is_approved: bool
-    user_id: str
+    is_approved: Optional[bool] = False
+    user_id: Optional[str] = None  # ID of the user who added the tool
 
-class ToolCreate(ToolBase):
-    category_ids: List[int] = []  # Add category IDs
+class ToolCreate(BaseModel):
+    name: str
+    description: str
+    link: HttpUrl
+    logo_url: Optional[str] = None
+    pricing_type: PricingType = PricingType.free
+    category_ids: List[int]
+    # handled by backend
+    is_approved: Optional[bool] = False
+    user_id: Optional[str] = None
 
 class ToolUpdate(BaseModel):
     name: Optional[str] = None

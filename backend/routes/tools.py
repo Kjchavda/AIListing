@@ -4,6 +4,8 @@ from typing import List, Optional
 from backend.database.database import get_db
 from backend.models import Tool as ToolModel, Category as CategoryModel
 from backend.schemas import Tool, ToolCreate, ToolUpdate, PricingType
+from backend.auth import get_current_user
+
 
 router = APIRouter(prefix="/tools", tags=["tools"])
 
@@ -55,7 +57,7 @@ def get_tool(tool_id: int, db: Session = Depends(get_db)):
     return tool
 
 @router.post("/", response_model=Tool, status_code=status.HTTP_201_CREATED)
-def create_tool(tool: ToolCreate, db: Session = Depends(get_db)):
+def create_tool(tool: ToolCreate, db: Session = Depends(get_db), current_user: str = Depends(get_current_user)):
     """Create a new tool with categories"""
     # Check if tool already exists
     existing = db.query(ToolModel).filter(ToolModel.name == tool.name).first()
@@ -82,7 +84,12 @@ def create_tool(tool: ToolCreate, db: Session = Depends(get_db)):
         categories = []
     
     # Create tool without category_ids field
-    tool_data = tool.model_dump(exclude={'category_ids'})
+    tool_data = tool.model_dump(exclude={'category_ids', 'user_id'})
+
+    tool_data["user_id"] = current_user
+
+    tool_data["link"] = str(tool_data["link"])
+    
     db_tool = ToolModel(**tool_data)
     
     # Associate categories

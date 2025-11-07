@@ -16,11 +16,11 @@ const SubmitToolPage = () => {
   const [tagline, setTagline] = useState("");
   const [description, setDescription] = useState("");
   const [link, setLink] = useState("");
-  
+
   // 2. State for the categories
   const [allCategories, setAllCategories] = useState([]);
   const [selectedCategories, setSelectedCategories] = useState([]);
-  
+
   // 3. State for form feedback
   const [message, setMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -59,7 +59,6 @@ const SubmitToolPage = () => {
 
     const newTool = {
       name,
-      tagline,
       description,
       link,
       category_ids: selectedCategories,
@@ -75,13 +74,14 @@ const SubmitToolPage = () => {
           Authorization: `Bearer ${token}`,
         },
       });
-      
-      setMessage("Tool submitted successfully! It will be reviewed by our team.");
+
+      setMessage(
+        "Tool submitted successfully! It will be reviewed by our team."
+      );
       // Redirect to homepage after 3 seconds
       setTimeout(() => {
         navigate("/");
       }, 3000);
-
     } catch (error) {
       console.error("Failed to submit tool:", error);
       setMessage("Failed to submit tool. Please try again.");
@@ -97,9 +97,9 @@ const SubmitToolPage = () => {
           Back to all tools
         </Link>
       </Button>
-      
+
       <h1 className="text-4xl font-bold mb-8">Submit a New Tool</h1>
-      
+
       {/* Show a success/error message after submission */}
       {message ? (
         <div className="p-4 bg-secondary rounded-md text-secondary-foreground">
@@ -110,41 +110,74 @@ const SubmitToolPage = () => {
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
             <Label htmlFor="name">Tool Name</Label>
-            <Input id="name" value={name} onChange={(e) => setName(e.target.value)} required />
+            <Input
+              id="name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              required
+            />
           </div>
-          <div>
+          {/*<div>
             <Label htmlFor="tagline">Tagline (Short Description)</Label>
             <Input id="tagline" value={tagline} onChange={(e) => setTagline(e.target.value)} required />
-          </div>
+          </div>*/}
           <div>
             <Label htmlFor="description">Full Description</Label>
-            <Textarea id="description" value={description} onChange={(e) => setDescription(e.target.value)} required />
+            <Textarea
+              id="description"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              required
+            />
           </div>
           <div>
             <Label htmlFor="link">Website Link (URL)</Label>
-            <Input id="link" type="url" placeholder="https://..." value={link} onChange={(e) => setLink(e.target.value)} required />
+            <Input
+              id="link"
+              type="url"
+              placeholder="https://..."
+              value={link}
+              onChange={(e) => setLink(e.target.value)}
+              required
+            />
           </div>
-          
+
           <div>
             <Label>Categories (select at least one)</Label>
             <div className="space-y-2 mt-2 p-4 border rounded-md max-h-48 overflow-y-auto">
-              {allCategories.length > 0 ? allCategories.map((category) => (
-                <div key={category.id} className="flex items-center space-x-2">
-                  <Checkbox
-                    id={`category-${category.id}`}
-                    onCheckedChange={() => handleCategoryChange(category.id)}
-                  />
-                  <Label htmlFor={`category-${category.id}`}>{category.name}</Label>
-                </div>
-              )) : (
-                <p className="text-sm text-muted-foreground">Loading categories...</p>
+              {allCategories.length > 0 ? (
+                allCategories.map((category) => (
+                  <div
+                    key={category.id}
+                    className="flex items-center space-x-2"
+                  >
+                    <Checkbox
+                      id={`category-${category.id}`}
+                      onCheckedChange={() => handleCategoryChange(category.id)}
+                    />
+                    <Label htmlFor={`category-${category.id}`}>
+                      {category.name}
+                    </Label>
+                  </div>
+                ))
+              ) : (
+                <p className="text-sm text-muted-foreground">
+                  Loading categories...
+                </p>
               )}
             </div>
           </div>
-          
-          <Button type="submit" size="lg" disabled={isLoading || selectedCategories.length === 0}>
+
+          {/* <Button type="submit" size="lg" disabled={isLoading || selectedCategories.length === 0}>
             {isLoading ? "Submitting..." : "Submit for Review"}
-          </Button>
+          </Button> */}
+          <button
+            type="submit" // ✅ key change
+            disabled={isLoading || selectedCategories.length === 0}
+            className="px-6 py-3 rounded-full text-sm font-semibold text-white bg-gradient-to-r from-[#370361] to-[#0b8793] hover:opacity-90 transition-opacity cursor-pointer"
+          >
+            {isLoading ? "Submitting..." : "Submit for Review"}
+          </button>
         </form>
       )}
     </div>
