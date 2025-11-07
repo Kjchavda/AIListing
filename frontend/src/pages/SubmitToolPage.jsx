@@ -9,7 +9,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 import { ArrowLeft } from "lucide-react";
 
-// TODO: push it down a bit as it is covered by header
+// I've added pt-24 here to fix your TODO
 const SubmitToolPage = () => {
   // 1. State for the form fields
   const [name, setName] = useState("");
@@ -90,7 +90,7 @@ const SubmitToolPage = () => {
   };
 
   return (
-    <div className="container mx-auto p-4 max-w-2xl">
+    <div className="container mx-auto p-4 max-w-2xl pt-24">
       <Button asChild variant="outline" className="mb-8">
         <Link to="/">
           <ArrowLeft className="mr-2 h-4 w-4" />

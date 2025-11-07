@@ -27,6 +27,14 @@ function Header() {
   const linkBase = "px-3 py-2 rounded-full text-sm transition-colors";
   const inactive = "text-muted-foreground hover:text-foreground";
   const active = "text-foreground bg-card/90";
+
+  // 1. Create a list for the links that are *always* visible
+  const publicNavLinks = [
+    { to: "/", label: "Home" },
+    { to: "/categories", label: "Categories" },
+    { to: "/blog", label: "Blog" },
+  ];
+
   return (
     <header className="fixed top-0 inset-x-0 z-50 border-b border-white/10 bg-background/50 backdrop-blur-sm">
       <div className="container flex items-center justify-between gap-6 py-4">
@@ -40,12 +48,8 @@ function Header() {
           <span className="font-semibold tracking-tight">AI Toolkit</span>
         </Link>
         <nav className="hidden md:flex items-center gap-1">
-          {[
-            { to: "/", label: "Home" },
-            { to: "/categories", label: "Categories" },
-            { to: "/pricing", label: "Pricing" },
-            { to: "/blog", label: "Blog" },
-          ].map((l) => (
+          {/* 2. Render the public links */}
+          {publicNavLinks.map((l) => (
             <NavLink
               key={l.to}
               to={l.to}
@@ -57,27 +61,43 @@ function Header() {
               {l.label}
             </NavLink>
           ))}
-        </nav>
-        {/* <Link
-          to="/get-started"
-          className="hidden md:inline-flex items-center rounded-full text-sm font-semibold text-white bg-gradient-to-r from-[#370361] to-[#0b8793] hover:opacity-90 transition-opacity px-6 py-3"
-        >
-          Get Started
-        </Link> */}
-        <SignedOut>
+
+          {/* 3. Add the conditional "Add Tool" link */}
+          <SignedOut>
             <Link
+              to="/sign-in" // As requested, links to sign-in page
+              className={`${linkBase} ${inactive}`}
+            >
+              Add Tool
+            </Link>
+          </SignedOut>
+          <SignedIn>
+            <NavLink
+              to="/submit-tool" // The real link for logged-in users
+              className={({ isActive }) =>
+                `${linkBase} ${isActive ? active : inactive}`
+              }
+            >
+              Add Tool
+            </NavLink>
+          </SignedIn>
+        </nav>
+
+        {/* This "Get Started" button logic is already correct */}
+        <SignedOut>
+          <Link
             to={"/sign-in"}
-          className="hidden md:inline-flex items-center rounded-full text-sm font-semibold text-white bg-gradient-to-r from-[#370361] to-[#0b8793] hover:opacity-90 transition-opacity px-6 py-3"
-        >
-          Get Started
-        </Link>
-          
+            className="hidden md:inline-flex items-center rounded-full text-sm font-semibold text-white bg-gradient-to-r from-[#370361] to-[#0b8793] hover:opacity-90 transition-opacity px-6 py-3"
+          >
+            Get Started
+          </Link>
         </SignedOut>
+
+        {/* This UserButton is also correct */}
         <SignedIn>
           <UserButton />
         </SignedIn>
       </div>
-
     </header>
   );
 }
