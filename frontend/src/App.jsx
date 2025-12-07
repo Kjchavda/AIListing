@@ -19,6 +19,7 @@ import SignInPage from "./pages/SignInPage";
 import SignUpPage from "./pages/SignUpPage";
 import SubmitToolPage from "./pages/SubmitToolPage";
 import AdminPage from "./pages/AdminPage";
+import { CategoryPage } from "./pages/CategoryPage";
 
 const queryClient = new QueryClient();
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY
@@ -33,7 +34,7 @@ const MainLayout = () => (
     <main className="pt-20"> 
         <Outlet />
     </main>
-    <Footer />
+    {/* <Footer /> */}
   </>
 );
 
@@ -52,7 +53,7 @@ const App = () => (
             <Route element={<MainLayout />}>
               <Route path="/" element={<HomePage />} />
               <Route path="/tools/:id" element={<ToolDetailPage />} />
-              <Route path="/categories" element={<Placeholder />} />
+              <Route path="/categories" element={<CategoryPage />} />
               <Route path="/submit-tool" element={<SubmitToolPage />} />
               <Route path="/admin" element={<AdminPage />} />
 
