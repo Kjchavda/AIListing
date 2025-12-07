@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Plus, X, Check, ExternalLink, ArrowRightLeft, Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { CategoryPill } from "@/components/CategoryPill";
 import {
   Dialog,
   DialogContent,
@@ -181,20 +182,18 @@ const ComparePage = () => {
             {/* Horizontal Category Scroll */}
             <ScrollArea className="w-full whitespace-nowrap">
               <div className="flex space-x-2 pb-2">
-                <FilterPill
+                <CategoryPill
+                  label="All Categories"
                   active={selectedCategory === "all"}
                   onClick={() => setSelectedCategory("all")}
-                >
-                  All Categories
-                </FilterPill>
+                />
                 {categories.map((cat) => (
-                  <FilterPill
+                  <CategoryPill
                     key={cat.id}
+                    label={cat.name}
                     active={selectedCategory === cat.id}
                     onClick={() => setSelectedCategory(cat.id)}
-                  >
-                    {cat.name}
-                  </FilterPill>
+                  />
                 ))}
               </div>
             </ScrollArea>
@@ -308,20 +307,6 @@ const ComparisonRow = ({ label, val1, val2, isLast }) => (
       {val2}
     </div>
   </div>
-);
-
-const FilterPill = ({ active, children, onClick }) => (
-  <button
-    onClick={onClick}
-    className={`
-      px-5 py-2 rounded-full text-sm font-medium transition-all duration-200 border
-      ${active
-        ? "bg-white text-slate-950 border-white shadow-md scale-105"
-        : "bg-slate-900 text-slate-400 border-slate-800 hover:text-white hover:border-slate-600 hover:bg-slate-800"}
-    `}
-  >
-    {children}
-  </button>
 );
 
 export default ComparePage;
