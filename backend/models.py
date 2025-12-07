@@ -2,6 +2,7 @@ from datetime import datetime
 from sqlalchemy import Column, DateTime, Enum, Integer, String, Table, Text, Boolean, TIMESTAMP, ForeignKey
 from sqlalchemy.sql import func
 from sqlalchemy.orm import relationship
+from sqlalchemy.dialects.postgresql import JSONB
 from sqlalchemy.ext.declarative import declarative_base
 
 
@@ -35,3 +36,30 @@ class Category(Base):
     name = Column(String, unique=True, nullable=False)
     # Relationship to tools
     tools = relationship("Tool", secondary=tool_category_association, back_populates="categories")
+
+class Workflow(Base):
+    __tablename__ = "workflows"
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    title = Column(String(150), nullable=False)
+    slug = Column(String(200), unique=True, index=True)
+    description = Column(Text)
+    graph = Column(JSONB, nullable=False)
+    author_id = Column(String(128), nullable=False)
+    is_public = Column(Boolean, default=True, index=True)
+    likes_count = Column(Integer, default=0)
+    saves_count = Column(Integer, default=0)
+    thumbnail_url = Column(String, nullable=True)
+    created_at = Column(DateTime(timezone=True), server_default=func.now())
+    updated_at = Column(DateTime(timezone=True), onupdate=func.now())
+
+class WorkflowLike(Base):
+    __tablename__ = "workflow_likes"
+    id = Column(Integer, primary_key=True)
+    workflow_id = Column(Integer, ForeignKey("workflows.id", ondelete="CASCADE"))
+    user_id = Column(String(128), nullable=False)
+
+class WorkflowSave(Base):
+    __tablename__ = "workflow_saves"
+    id = Column(Integer, primary_key=True)
+    workflow_id = Column(Integer, ForeignKey("workflows.id", ondelete="CASCADE"))
+    user_id = Column(String(128), nullable=False)
