@@ -1,13 +1,14 @@
 import "./index.css";
-import { SignedIn, SignedOut, SignInButton, UserButton } from '@clerk/clerk-react';
 import { Toaster } from "@/components/ui/toaster";
 import { createRoot } from "react-dom/client";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route, Link, NavLink, Outlet } from "react-router-dom";
-import { ClerkProvider, useUser } from '@clerk/clerk-react'; // Consolidated import
+import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom";
+import { ClerkProvider } from '@clerk/clerk-react';
 import { StrictMode } from "react";
+import { Header } from "@/components/Header";
+import { Footer } from "@/components/Footer";
 
 // Pages
 import HomePage from "./pages/HomePage";
@@ -26,125 +27,9 @@ if (!PUBLISHABLE_KEY) {
   throw new Error('Missing Publishable Key')
 }
 
-// --- CONFIGURATION ---
-// Ideally, put this in a config file or .env variable so it's shared with AdminPage.jsx
-const ADMIN_ID = "user_358uhfB0Qi2yobJpykzod0H7SaK"; 
-
-function Header() {
-  const linkBase = "px-3 py-2 rounded-full text-sm transition-colors";
-  const inactive = "text-muted-foreground hover:text-foreground";
-  const active = "text-foreground bg-card/90";
-
-  // Use isLoaded to prevent flickering or incorrect checks during loading
-  const { user, isLoaded } = useUser();
-
-  const publicNavLinks = [
-    { to: "/", label: "Home" },
-    { to: "/categories", label: "Categories" },
-    { to: "/blog", label: "Blog" },
-  ];
-
-  return (
-    <header className="fixed top-0 inset-x-0 z-50 border-b border-white/10 bg-background/50 backdrop-blur-sm">
-      <div className="container flex items-center justify-between gap-6 py-4">
-        <Link to="/" className="flex items-center gap-3">
-          <span
-            className="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-[rgba(7,7,9,1)_6.5%] to-[rgba(27,24,113,1)_93.2%] text-white font-extrabold shadow"
-            aria-label="AI Toolkit logo"
-          >
-            AI
-          </span>
-          <span className="font-semibold tracking-tight">AI Toolkit</span>
-        </Link>
-        
-        <nav className="hidden md:flex items-center gap-1">
-          {/* Public Links */}
-          {publicNavLinks.map((l) => (
-            <NavLink
-              key={l.to}
-              to={l.to}
-              end={l.to === "/"}
-              className={({ isActive }) =>
-                `${linkBase} ${isActive ? active : inactive}`
-              }
-            >
-              {l.label}
-            </NavLink>
-          ))}
-
-          {/* "Add Tool" Logic */}
-          <SignedOut>
-            <Link
-              to="/sign-in"
-              className={`${linkBase} ${inactive}`}
-            >
-              Add Tool
-            </Link>
-          </SignedOut>
-          <SignedIn>
-            <NavLink
-              to="/submit-tool"
-              className={({ isActive }) =>
-                `${linkBase} ${isActive ? active : inactive}`
-              }
-            >
-              Add Tool
-            </NavLink>
-          </SignedIn>
-
-          {/* Admin Link Logic */}
-          {/* Only show if loaded, user exists, and ID matches */}
-          {isLoaded && user?.id === ADMIN_ID && (
-            <NavLink 
-              to="/admin" 
-              className={({ isActive }) =>
-                `${linkBase} ${isActive ? active : inactive}`
-              }
-            >
-              Admin Panel
-            </NavLink>
-          )}
-        </nav>
-
-        <div className="flex items-center gap-4">
-            <SignedOut>
-            <Link
-                to={"/sign-in"}
-                className="hidden md:inline-flex items-center rounded-full text-sm font-semibold text-white bg-gradient-to-r from-[#370361] to-[#0b8793] hover:opacity-90 transition-opacity px-6 py-3"
-            >
-                Get Started
-            </Link>
-            </SignedOut>
-
-            <SignedIn>
-            <UserButton />
-            </SignedIn>
-        </div>
-      </div>
-    </header>
-  );
-}
-
-function Footer() {
-  return (
-    <footer className="mt-16 border-t border-white/10">
-      <div className="container py-10 flex flex-col md:flex-row items-center md:items-start justify-between gap-6 text-sm text-muted-foreground">
-        <div className="flex gap-4">
-          <Link to="/about" className="hover:text-foreground">About</Link>
-          <Link to="/contact" className="hover:text-foreground">Contact</Link>
-          <Link to="/privacy" className="hover:text-foreground">Privacy Policy</Link>
-          <Link to="/terms" className="hover:text-foreground">Terms of Service</Link>
-        </div>
-        <p>© 2024 AI Toolkit. All rights reserved.</p>
-      </div>
-    </footer>
-  );
-}
-
 const MainLayout = () => (
   <>
     <Header />
-    {/* Added padding-top to avoid content hiding behind fixed header */}
     <main className="pt-20"> 
         <Outlet />
     </main>
