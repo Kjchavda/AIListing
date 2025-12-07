@@ -37,10 +37,13 @@ app.include_router(tool_router)
 app.include_router(category_router)
 app.include_router(admin_router)
 
+origin = ["http://localhost:5173",
+        "http://127.0.0.1:5173"]
+
 # CORS middleware
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # In production, replace with specific origins
+    allow_origins=origin,  # In production, replace with specific origins
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

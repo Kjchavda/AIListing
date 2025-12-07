@@ -4,7 +4,7 @@ from typing import List, Optional
 from backend.auth import get_current_user
 from backend.database.database import get_db
 from backend.models import Tool as ToolModel, Category as CategoryModel
-from backend.schemas import ToolBase
+from backend.schemas import Tool, ToolBase
 
 router = APIRouter(prefix="/admin", tags=["admin"])
 
@@ -12,8 +12,8 @@ router = APIRouter(prefix="/admin", tags=["admin"])
 # Make frontend for these routes 
 
 # --- CONFIGURATION ---
-# GO TO CLERK DASHBOARD -> USERS -> CLICK YOUR NAME -> COPY "USER ID"
-ADMIN_USER_ID = "user_358uhfB0Qi2yobJpykzod0H7SaK" # <--- REPLACE THIS WITH YOUR ID
+
+ADMIN_USER_ID = "user_358uhfB0Qi2yobJpykzod0H7SaK" 
 
 # --- ADMIN CHECK DEPENDENCY ---
 def require_admin(user_id: str = Depends(get_current_user)):
@@ -29,7 +29,7 @@ def require_admin(user_id: str = Depends(get_current_user)):
 
 # --- ROUTES ---
 
-@router.get("/pending-tools", response_model=List[ToolBase])
+@router.get("/pending-tools", response_model=List[Tool])
 def get_pending_tools(
     db: Session = Depends(get_db),
     skip: int = 0,
