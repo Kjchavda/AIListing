@@ -3,7 +3,7 @@ from sqlalchemy.orm import Session
 from typing import List, Optional
 from backend.database.database import get_db
 from backend.models import Tool as ToolModel, Category as CategoryModel
-from backend.schemas import Tool, ToolCreate, ToolUpdate, PricingType
+from backend.schemas import CompareRequest, Tool, ToolCreate, ToolUpdate, PricingType
 from backend.auth import get_current_user
 
 
@@ -228,3 +228,26 @@ def remove_category_from_tool(
     db.commit()
     db.refresh(tool)
     return tool
+
+@router.post("/compare", response_model=List[Tool])
+def compare_tools(req: CompareRequest, db: Session = Depends(get_db)):
+    if not req.ids:
+        raise HTTPException(status_code=400, detail="ids list cannot be empty")
+
+    # fetch tools matching the provided IDs
+    tools = (
+        db.query(ToolModel)
+        .filter(ToolModel.id.in_(req.ids))
+        # If you have an approval field, keep the line below; otherwise remove it.
+        # .filter(ToolModel.is_approved.is_(True))
+        .all()
+    )
+
+    # optional: preserve order of returned tools to match input ordering
+    if tools:
+        tools_by_id = {t.id: t for t in tools}
+        ordered_tools = [tools_by_id[i] for i in req.ids if i in tools_by_id]
+    else:
+        ordered_tools = []
+
+    return ordered_tools

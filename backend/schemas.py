@@ -1,4 +1,4 @@
-from pydantic import BaseModel, HttpUrl
+from pydantic import BaseModel, Field, HttpUrl
 from typing import Optional, List
 from datetime import datetime
 from enum import Enum
@@ -67,3 +67,6 @@ class Tool(ToolBase):
 
 class ToolWithCategories(Tool):
     pass  # Alias for clarity
+
+class CompareRequest(BaseModel):
+    ids: List[int] = Field(..., description="List of tool IDs to compare")

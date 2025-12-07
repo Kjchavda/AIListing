@@ -14,7 +14,8 @@ export function Header() {
   const publicNavLinks = [
     { to: "/", label: "Home" },
     { to: "/categories", label: "Categories" },
-    { to: "/blog", label: "Blog" },
+    { to: "/compare", label: "Compare" },
+    
   ];
 
   return (

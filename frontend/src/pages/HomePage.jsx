@@ -1,20 +1,10 @@
 import { useEffect, useMemo, useState } from "react";
-import { categoriesAPI, toolsAPI } from "../services/api";
-
 import { Link , useSearchParams} from 'react-router-dom';
 
 
 export default function HomePage() {
   const [searchParams, setSearchParams] = useSearchParams();
   const [query, setQuery] = useState("");
-  const [activeCat, setActiveCat] = useState(()=>{
-    const catIdfromParams = searchParams.get('category_id');
-    if(!catIdfromParams){
-      return null;
-    }
-    const initialCat = parseInt(catIdfromParams, 10);
-    return !isNaN(initialCat) ? initialCat : null;
-  });
 
   return (
     <main className="relative">
