@@ -1,5 +1,5 @@
 from datetime import datetime
-from sqlalchemy import Column, DateTime, Enum, Integer, String, Table, Text, Boolean, TIMESTAMP, ForeignKey
+from sqlalchemy import Column, DateTime, Enum, Integer, String, Table, Text, Boolean, TIMESTAMP, ForeignKey, UniqueConstraint
 from sqlalchemy.sql import func
 from sqlalchemy.orm import relationship
 from sqlalchemy.dialects.postgresql import JSONB
@@ -63,3 +63,29 @@ class WorkflowSave(Base):
     id = Column(Integer, primary_key=True)
     workflow_id = Column(Integer, ForeignKey("workflows.id", ondelete="CASCADE"))
     user_id = Column(String(128), nullable=False)
+
+class Bookmark(Base):
+    __tablename__ = "bookmarks"
+
+    id = Column(Integer, primary_key=True)
+    user_id = Column(String, nullable=False)   # Store Clerk ID directly
+    tool_id = Column(Integer, ForeignKey("tools.id"), nullable=True)
+    workflow_id = Column(Integer, ForeignKey("workflows.id"), nullable=True)
+    created_at = Column(TIMESTAMP(timezone=True), server_default=func.now())
+
+    __table_args__ = (
+        UniqueConstraint("user_id", "tool_id", "workflow_id", name="uq_bookmark"),
+    )
+
+class Like(Base):
+    __tablename__ = "likes"
+
+    id = Column(Integer, primary_key=True)
+    user_id = Column(String, nullable=False)   # Store Clerk ID directly
+    tool_id = Column(Integer, ForeignKey("tools.id"), nullable=True)
+    workflow_id = Column(Integer, ForeignKey("workflows.id"), nullable=True)
+    created_at = Column(TIMESTAMP(timezone=True), server_default=func.now())
+
+    __table_args__ = (
+        UniqueConstraint("user_id", "tool_id", "workflow_id", name="uq_like"),
+    )

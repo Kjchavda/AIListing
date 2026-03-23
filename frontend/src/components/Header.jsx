@@ -4,6 +4,11 @@ import { Link, NavLink } from "react-router-dom";
 
 const ADMIN_ID = "user_358uhfB0Qi2yobJpykzod0H7SaK";
 
+//---------------------------------------------------
+// Make a signedin links list same as public links to make code more readable.
+// Move bookmarks and add tool to the user tab instead of main nav?
+//---------------------------------------------------
+
 export function Header() {
   const linkBase = "px-3 py-2 rounded-full text-sm transition-colors";
   const inactive = "text-muted-foreground hover:text-foreground";
@@ -14,8 +19,7 @@ export function Header() {
   const publicNavLinks = [
     { to: "/", label: "Home" },
     { to: "/categories", label: "Categories" },
-    { to: "/compare", label: "Compare" },
-    
+    { to: "/compare", label: "Compare" },    
   ];
 
   return (
@@ -63,6 +67,14 @@ export function Header() {
               }
             >
               Add Tool
+            </NavLink>
+            <NavLink
+              to="/bookmarks"
+              className={({ isActive }) =>
+                `${linkBase} ${isActive ? active : inactive}`
+              }
+            >
+              Bookmarks
             </NavLink>
           </SignedIn>
 

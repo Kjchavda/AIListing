@@ -25,4 +25,23 @@ export const categoriesAPI = {
   getToolsByCategory: (id) => api.get(`/categories/${id}/tools`),
 };
 
+export const bookmarksAPI = {
+  getAll: (params = {}) => api.get('/bookmarks/', { params }),
+  create: (data) => api.post('/bookmarks/', data),
+  delete: (id) => api.delete(`/bookmarks/${id}`),
+  check: (params) => api.get('/bookmarks/check', { params }),
+  // Toggle convenience endpoint
+  toggleTool: (toolId) => api.post(`/tools/${toolId}/bookmark`),
+};
+
+// Likes API
+export const likesAPI = {
+  getAll: (params = {}) => api.get('/likes/', { params }),
+  create: (data) => api.post('/likes/', data),
+  delete: (id) => api.delete(`/likes/${id}`),
+  check: (params) => api.get('/likes/check', { params }),
+  toggleTool: (toolId) => api.post(`/tools/${toolId}/like`),
+};
+
+
 export default api;

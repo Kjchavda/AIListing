@@ -21,6 +21,7 @@ import SubmitToolPage from "./pages/SubmitToolPage";
 import AdminPage from "./pages/AdminPage";
 import { CategoryPage } from "./pages/CategoryPage";
 import ComparePage from "./pages/ComparePage.jsx";
+import BookmarksPage from "./pages/BookmarksPage.jsx";
 
 const queryClient = new QueryClient();
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY
@@ -57,7 +58,7 @@ const App = () => (
               <Route path="/categories" element={<CategoryPage />} />
               <Route path="/submit-tool" element={<SubmitToolPage />} />
               <Route path="/admin" element={<AdminPage />} />
-
+              <Route path="/bookmarks" element={<BookmarksPage />} />
               <Route path="/pricing" element={<Placeholder />} />
               <Route path="/compare" element={<ComparePage />} />
               <Route path="/get-started" element={<Placeholder />} />

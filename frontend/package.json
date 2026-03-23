@@ -27,6 +27,7 @@
     "axios": "^1.13.1",
     "dotenv": "^17.2.1",
     "express": "^5.1.0",
+    "reactflow": "^11.11.4",
     "zod": "^3.25.76"
   },
   "devDependencies": {
