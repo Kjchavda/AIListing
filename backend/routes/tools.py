@@ -24,7 +24,7 @@ def get_all_tools(
     - pricing_type: Filter by pricing type (free, freemium, paid, contact_us)
     - search: Search in tool name or description
     """
-    query = db.query(ToolModel)
+    query = db.query(ToolModel).filter(ToolModel.is_approved == True)
     
     # Filter by category
     if category_id:
@@ -48,7 +48,7 @@ def get_all_tools(
 @router.get("/{tool_id}", response_model=Tool)
 def get_tool(tool_id: int, db: Session = Depends(get_db)):
     """Get a specific tool by ID"""
-    tool = db.query(ToolModel).filter(ToolModel.id == tool_id).first()
+    tool = db.query(ToolModel).filter(ToolModel.id == tool_id, ToolModel.is_approved == True).first()
     if not tool:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,

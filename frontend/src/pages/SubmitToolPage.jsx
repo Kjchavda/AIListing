@@ -1,4 +1,3 @@
-// frontend/src/pages/SubmitToolPage.jsx
 import { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "@clerk/clerk-react";
