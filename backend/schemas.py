@@ -71,91 +71,27 @@ class ToolWithCategories(Tool):
 class CompareRequest(BaseModel):
     ids: List[int] = Field(..., description="List of tool IDs to compare")
 
-
-# Workflow Schemas
-class Graph(BaseModel):
-    nodes: List[Dict[str, Any]] = Field(..., description="React Flow nodes array")
-    edges: List[Dict[str, Any]] = Field(..., description="React Flow edges array")
-
-    model_config = {"extra": "allow"}
-
-
-class WorkflowCreate(BaseModel):
-    title: str = Field(..., max_length=150)
-    description: Optional[str] = None
-    graph: Graph
-    is_public: bool = True
-
-    model_config = {"extra": "ignore"}
-
-
-class WorkflowUpdate(BaseModel):
-    title: Optional[str] = None
-    description: Optional[str] = None
-    graph: Optional[Graph] = None
-    is_public: Optional[bool] = None
-
-    model_config = {"extra": "ignore"}
-
-
-class WorkflowRead(BaseModel):
-    id: int
-    title: str
-    slug: str
-    description: Optional[str] = None
-    graph: Graph
-    author_id: str
-    is_public: bool
-    likes_count: int = 0
-    saves_count: int = 0
-    thumbnail_url: Optional[str] = None
-    created_at: Optional[datetime] = None
-    updated_at: Optional[datetime] = None
-
-    # allow reading directly from SQLAlchemy objects
-    model_config = {"from_attributes": True, "extra": "ignore"}
-
 # Bookmark Schemas
 class BookmarkCreate(BaseModel):
-    tool_id: Optional[int] = None
-    workflow_id: Optional[int] = None
-
-    def validate(self):
-        if (self.tool_id is None) and (self.workflow_id is None):
-            raise ValueError("Either tool_id or workflow_id must be provided.")
-        if (self.tool_id is not None) and (self.workflow_id is not None):
-            raise ValueError("Provide only one of tool_id or workflow_id.")
-
+    tool_id: int
 
 class BookmarkOut(BaseModel):
     id: int
     user_id: str
-    tool_id: Optional[int]
-    workflow_id: Optional[int]
+    tool_id: int
     created_at: Optional[datetime]  # ISO str
 
     class Config:
         orm_mode = True
 
-
 class LikeCreate(BaseModel):
-    tool_id: Optional[int] = None
-    workflow_id: Optional[int] = None
-
-    def validate(self):
-        if (self.tool_id is None) and (self.workflow_id is None):
-            raise ValueError("Either tool_id or workflow_id must be provided.")
-        if (self.tool_id is not None) and (self.workflow_id is not None):
-            raise ValueError("Provide only one of tool_id or workflow_id.")
-
+    tool_id: int
 
 class LikeOut(BaseModel):
     id: int
     user_id: str
-    tool_id: Optional[int]
-    workflow_id: Optional[int]
+    tool_id: int
     created_at: Optional[datetime]
 
     class Config:
         orm_mode = True
-

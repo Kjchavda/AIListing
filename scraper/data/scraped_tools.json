@@ -1,0 +1,422 @@
+[
+  {
+    "name": "Language modelling at scale: Gopher, ethical considerations, and retrieval",
+    "description": "Language, and its role in demonstrating and facilitating comprehension - or intelligence - is a fundamental part of being human. It gives people the ability to communicate thoughts and concepts, express ideas, create memories, and build mutual understanding. These are foundational parts of social intelligence. Itâs why our teams at DeepMind study aspects of language processing and communication, both in artificial agents and in humans.",
+    "link": "https://www.deepmind.com/blog/language-modelling-at-scale-gopher-ethical-considerations-and-retrieval",
+    "logo_url": "https://lh3.googleusercontent.com/Mntz8H4rZBsuv1WHxsSRfHgYFMVH2C7aTrANtsRgRdZlkpigFhK23AQveHFw_hjZfVUlZNlrWn0w5A3BM50B4tYvJ-p3rlPRCznyTE12A_oKhK6oGKU=w1200-h630-n-nu-rw",
+    "pricing_type": "freemium",
+    "categories": [
+      "AI Tool"
+    ]
+  },
+  {
+    "name": "LibreChat",
+    "description": "LibreChat brings together all your AI conversations in one unified, customizable interface.",
+    "link": "https://librechat.ai/",
+    "logo_url": "https://www.librechat.ai/images/socialcards/default-image.png",
+    "pricing_type": "freemium",
+    "categories": [
+      "AI Tool"
+    ]
+  },
+  {
+    "name": "Chatbot UI",
+    "description": "Chatbot UI PWA",
+    "link": "https://www.chatbotui.com/",
+    "logo_url": "",
+    "pricing_type": "freemium",
+    "categories": [
+      "AI Tool"
+    ]
+  },
+  {
+    "name": "Exa",
+    "description": "The Exa Web search API retrieves the best, realtime data from the web for your AI",
+    "link": "https://metaphor.systems/",
+    "logo_url": "https://exa.imgix.net/og-image.png/",
+    "pricing_type": "freemium",
+    "categories": [
+      "AI Tool"
+    ]
+  },
+  {
+    "name": "You.com",
+    "description": "Skip the groundwork with our AI-ready API platform and ultra-specific vertical indexes, delivering advanced search capabilities to power your next product.",
+    "link": "https://you.com/",
+    "logo_url": "https://cdn.prod.website-files.com/687f2dca0cbe61df74670d33/69ab356800f51c17c6639c40_YDC-Opengraph%20Image_1200x630_Op2.png",
+    "pricing_type": "freemium",
+    "categories": [
+      "AI Tool"
+    ]
+  },
+  {
+    "name": "Komo AI",
+    "description": "Komo is the agentic AI platform for centralized operations. Deploy AI agents that execute your mission-critical operational workflows end to end.",
+    "link": "https://komo.ai/",
+    "logo_url": "https://komo.ai/banner.png",
+    "pricing_type": "freemium",
+    "categories": [
+      "AI Tool"
+    ]
+  },
+  {
+    "name": "Put AI agents to work for marketing",
+    "description": "Orchestrate intelligent agents to run end-to-end marketing workflows—delivering speed, control, and measurable impact.",
+    "link": "https://www.jasper.ai/",
+    "logo_url": "https://cdn.prod.website-files.com/6807ee8d73c233fb82842313/6846454bda26628fcf51d54c_9650916b48ce089735bcc21cc8e43f2f_OpenGraph%20-%20Home.png",
+    "pricing_type": "freemium",
+    "categories": [
+      "AI Tool"
+    ]
+  },
+  {
+    "name": "Compose AI: Automated Your Writing",
+    "description": "No description available. Please update manually.",
+    "link": "https://www.compose.ai/",
+    "logo_url": "",
+    "pricing_type": "freemium",
+    "categories": [
+      "AI Tool"
+    ]
+  },
+  {
+    "name": "Free AI Writer, Content Generator & Writing Assistant",
+    "description": "Discover Rytr, your free AI writing assistant. Craft high-quality content faster than ever before. Start for free and upgrade as you grow!",
+    "link": "https://rytr.me/",
+    "logo_url": "",
+    "pricing_type": "freemium",
+    "categories": [
+      "AI Tool"
+    ]
+  },
+  {
+    "name": "Wordtune — Take your productivity to new heights",
+    "description": "Wordtune is an AI writing assistant, helping you rewrite, paraphrase, and refine your text for clarity, impact & authenticity. Humanize AI content, improve tone & express ideas effortlessly.",
+    "link": "https://www.wordtune.com/",
+    "logo_url": "https://cdn.prod.website-files.com/5f7e0f9d75fee6f6f546df46/66bc50ae0f2962888d8e06a2_OG%20-%20HOME%20PAGE%20.png",
+    "pricing_type": "freemium",
+    "categories": [
+      "AI Tool"
+    ]
+  },
+  {
+    "name": "HyperWrite",
+    "description": "Use our AI writer for content generation, research, speeches, rewriting, and more. HyperWrite uses the world's most powerful artificial intelligence technology to help you work faster and smarter in our AI document editor. Hundreds of AI tools to transform your writing, communication, and research.",
+    "link": "https://hyperwriteai.com/",
+    "logo_url": "https://cdn.prod.website-files.com/63fcd79d410b22ddf397e1b8/65cbc3bd3337c9f598fb1f7e_hyperwrite.png",
+    "pricing_type": "freemium",
+    "categories": [
+      "AI Tool"
+    ]
+  },
+  {
+    "name": "Moonbeam",
+    "description": "Kickstart your next great blog with Moonbeam: your long-form writing AI assistant.",
+    "link": "https://www.gomoonbeam.com/",
+    "logo_url": "https://gomoonbeam.com/brand/banner.png",
+    "pricing_type": "freemium",
+    "categories": [
+      "AI Tool"
+    ]
+  },
+  {
+    "name": "Future proof your business with GTM AI",
+    "description": "Introducing the first-ever GTM AI platform. Automate hundreds of tedious, repetitive tasks and empower your team to scale success like never before.",
+    "link": "https://www.copy.ai/",
+    "logo_url": "https://cdn.prod.website-files.com/628288c5cd3e8411b90a36a4/67111b6951504ebf1467be96_6708d064807b31c351b41284_share-og-image%20(1)-min.png",
+    "pricing_type": "freemium",
+    "categories": [
+      "AI Tool"
+    ]
+  },
+  {
+    "name": "Chatsonic",
+    "description": "AI Chat with GPT-4o, Claude, and Gemini to power your marketing workflows. Your AI Marketing Agent connects all your tools and handles research to publishing.",
+    "link": "https://writesonic.com/chat",
+    "logo_url": "https://cdn.prod.website-files.com/671f9e6bc06267864b5770e6/67aca3e57f1c4ce92574a4b6_Writesonic-OG.jpg",
+    "pricing_type": "freemium",
+    "categories": [
+      "AI Tool"
+    ]
+  },
+  {
+    "name": "AI Content Underperforms. Anyword Closes the Feedback Loop.",
+    "description": "Anyword works with any AI model or application, adding A/B-tested data at every step of the generation process. The result – a 30% lift in business outcomes.",
+    "link": "https://anyword.com/",
+    "logo_url": "https://cdn.prod.website-files.com/65a5365ee6f4219bc2d2f822/65d85069221f999621761943_Group%201261159146.png",
+    "pricing_type": "freemium",
+    "categories": [
+      "AI Tool"
+    ]
+  },
+  {
+    "name": "AI Platform for Ecommerce Product Data & Content",
+    "description": "Hypotenuse is an AI agent platform for ecommerce brands to enrich product data, edit images, and create product descriptions in their brand voice.",
+    "link": "https://www.hypotenuse.ai/",
+    "logo_url": "https://cdn.prod.website-files.com/5f23b456c81e6bebb921e9cb/68faf34db5cab4f4e99b0353_hypotenuseai-opengraph%20(1).webp",
+    "pricing_type": "freemium",
+    "categories": [
+      "AI Tool"
+    ]
+  },
+  {
+    "name": "Lavender",
+    "description": "Lavender helps thousands of sellers around the world write better emails faster and get more positive replies in less time.",
+    "link": "https://www.lavender.ai/",
+    "logo_url": "https://cdn.prod.website-files.com/658433a0cbce340e298ba330/6597e6c2db66b522a9ee07ab_openGraph.jpg",
+    "pricing_type": "freemium",
+    "categories": [
+      "AI Tool"
+    ]
+  },
+  {
+    "name": "Collaborative documents, with powerful AI editing tools",
+    "description": "Write faster, clearer, and smarter with Lex—the AI-powered word processor designed for modern creators. Effortlessly generate content, refine ideas, and elevate your writing flow.",
+    "link": "https://lex.page/",
+    "logo_url": "https://lex-inc-media.s3.us-west-2.amazonaws.com/lex-og-image.jpg",
+    "pricing_type": "freemium",
+    "categories": [
+      "AI Tool"
+    ]
+  },
+  {
+    "name": "Jenni",
+    "description": "Jenni is an AI research and academic writing assistant that helps students, researchers, and academics create essays, papers, and citations with ease.",
+    "link": "https://jenni.ai/",
+    "logo_url": "https://framerusercontent.com/images/z4JrDRfRywzEnZ5jahSZEkA9dI.png",
+    "pricing_type": "freemium",
+    "categories": [
+      "AI Tool"
+    ]
+  },
+  {
+    "name": "AI Writer",
+    "description": "Write essays, blog posts, and articles quickly and easily with AI Writer. Generate humanized AI text in multiple writing styles that sounds more human.",
+    "link": "https://www.writewithlaika.com/",
+    "logo_url": "",
+    "pricing_type": "freemium",
+    "categories": [
+      "AI Tool"
+    ]
+  },
+  {
+    "name": "QuillBot: Your complete writing solution",
+    "description": "Write effortlessly and efficiently with QuillBot's suite of AI tools. Paraphrase, check grammar, analyze tone, improve fluency, and more. Start doing your best work.",
+    "link": "https://quillbot.com",
+    "logo_url": "https://assets.quillbot.com/images/og-quillbot-img.png",
+    "pricing_type": "freemium",
+    "categories": [
+      "AI Tool"
+    ]
+  },
+  {
+    "name": "Postwise",
+    "description": "Never face writer's block again. AI that transforms your thoughts into viral content for Twitter/X, LinkedIn, and Threads. Start your free trial.",
+    "link": "https://postwise.ai/",
+    "logo_url": "https://postwise.ai/img/header.png",
+    "pricing_type": "freemium",
+    "categories": [
+      "AI Tool"
+    ]
+  },
+  {
+    "name": "Copysmith — AI Platforms for the New Era of Search & Content",
+    "description": "Copysmith builds specialized AI platforms — Frase, Describely, and Rytr — that help brands rank in traditional search, get cited by generative engines, and scale content.",
+    "link": "https://copysmith.ai/",
+    "logo_url": "https://copysmith.ai/og-image.png",
+    "pricing_type": "freemium",
+    "categories": [
+      "AI Tool"
+    ]
+  },
+  {
+    "name": "WebChatGPT: Prompt library with web access",
+    "description": "Augment your ChatGPT prompts with relevant web search results through web browsing.",
+    "link": "https://chrome.google.com/webstore/detail/webchatgpt-chatgpt-with-i/lpfemeioodjbpieminkklglpmhlngfcn",
+    "logo_url": "https://lh3.googleusercontent.com/3maJ8nK3Mi9UQ7wfHiUFFU3hH92sN4iPjXj8Z97sTWzwRTQtq9D9I6GfjtUS1u7P7GRGEpkA9uPZ6fsA0-Etz1tmP0s=s128-rj-sc0x00ffffff",
+    "pricing_type": "freemium",
+    "categories": [
+      "AI Tool"
+    ]
+  },
+  {
+    "name": "GPT for Sheets™ and Docs™",
+    "description": "AI agent for Google Sheets™. Automate formulas, formatting, cleanup, enrichment, analysis, bulk content generation and translation from a single prompt.",
+    "link": "https://workspace.google.com/marketplace/app/gpt_for_sheets_and_docs/677318054654",
+    "logo_url": "https://lh3.googleusercontent.com/o7JuMXjuICzBTcJKpHoxnmmATYy6CMu8-2n14GBXn6X_XczdWHQ",
+    "pricing_type": "freemium",
+    "categories": [
+      "AI Tool"
+    ]
+  },
+  {
+    "name": "YouTube Summary with ChatGPT & Claude",
+    "description": "Summarize YouTube videos, web articles, and PDFs to save time, powered by ChatGPT, Claude, Mistral AI, and Gemini.",
+    "link": "https://chrome.google.com/webstore/detail/youtube-summary-with-chat/nmmicjeknamkfloonkhhcjmomieiodli",
+    "logo_url": "https://lh3.googleusercontent.com/v87Ne-944ya_q_QY0aymwZA8VybkOc3eQQhL4942ewOhK3Y7qHQ2Yop7l5mfoNThWNz23O01fFxNM_etxRA5VUAsWg0=s128-rj-sc0x00ffffff",
+    "pricing_type": "freemium",
+    "categories": [
+      "AI Tool"
+    ]
+  },
+  {
+    "name": "AI Prompt Genius",
+    "description": "Craft a custom library of AI Prompts",
+    "link": "https://chrome.google.com/webstore/detail/chatgpt-prompt-genius/jjdnakkfjnnbbckhifcfchagnpofjffo",
+    "logo_url": "https://lh3.googleusercontent.com/yUzjad6jUZmRzFD-IGA7IhKAlOU4aC5PszIX9xwjC6XvjzTul8VxepQhFzVY7HNJEWOD8RdJjd8ulRzSHnRst2GD3A=s128-rj-sc0x00ffffff",
+    "pricing_type": "freemium",
+    "categories": [
+      "AI Tool"
+    ]
+  },
+  {
+    "name": "Zuvu AI: The Ultimate AI Agent Sidebar for Google Search & Beyond",
+    "description": "Zuvu AI: Your AI agent copilot for search, writing & web tasks. Run agents, compare results, and browse smarter.",
+    "link": "https://chrome.google.com/webstore/detail/chatgpt-for-search-engine/feeonheemodpkdckaljcjogdncpiiban",
+    "logo_url": "https://lh3.googleusercontent.com/69gQMJ-5Te1Y49emQBYIOQQK6AaABXF79gtoQVfyTEyArxvwfFr_ld7ENyg9w8iBMXY1KBNGI3jq187gTsodwAaYLuY=s128-rj-sc0x00ffffff",
+    "pricing_type": "freemium",
+    "categories": [
+      "AI Tool"
+    ]
+  },
+  {
+    "name": "ShareGPT: Share your wildest ChatGPT conversations with one click.",
+    "description": "ShareGPT is a Chrome extension that allows you to share your wildest ChatGPT conversations with one click.",
+    "link": "https://sharegpt.com/",
+    "logo_url": "https://sharegpt.com/thumbnail.png",
+    "pricing_type": "freemium",
+    "categories": [
+      "AI Tool"
+    ]
+  },
+  {
+    "name": "Jetwriter AI: Personalized AI Writing Assistant for Chrome, Desktop & Mobile. Free to Try.",
+    "description": "Write emails, correct grammar, translate, research, and do much more. Use AI on any site with our free AI browser extension. Powered by the most intelligent AI models (GPT-5.1, Claude, Gemini). Also available on web and mobile.",
+    "link": "https://chatgptwriter.ai/",
+    "logo_url": "https://jetwriter.ai/og.jpg",
+    "pricing_type": "freemium",
+    "categories": [
+      "AI Tool"
+    ]
+  },
+  {
+    "name": "Proofread, edit and track changes to your content using ChatGPT.",
+    "description": "editGPT is an AI tool that allows you to proofread, edit, and track changes to your content using ChatGPT",
+    "link": "https://www.editgpt.app/",
+    "logo_url": "https://editgpt.app//og.png",
+    "pricing_type": "freemium",
+    "categories": [
+      "AI Tool"
+    ]
+  },
+  {
+    "name": "Forefront",
+    "description": "Forefront is a platform to fine-tune and inference open-source-language-models.",
+    "link": "https://www.forefront.ai/",
+    "logo_url": "https://assets.forefront.ai/og_image.png",
+    "pricing_type": "freemium",
+    "categories": [
+      "AI Tool"
+    ]
+  },
+  {
+    "name": "GPT for Sheets™ Docs™ Forms™ Slides™",
+    "description": "GPT for Sheets™, Docs™ is an AI agent bringing ChatGPT 5.2, Claude, Gemini™, Perplexity, Mistral, and Grok to bulk tasks in Google Sheets™, with up to 400 prompts per minute and 200K rows at once.",
+    "link": "https://workspace.google.com/marketplace/app/gpt_for_sheets_docs_forms_slides/466607203252",
+    "logo_url": "https://lh3.googleusercontent.com/V-rK24hMQZ-v_9ajJ0j5ffnfDhb1QoLKz0pCE_WLSSzvHTW8QbNX",
+    "pricing_type": "freemium",
+    "categories": [
+      "AI Tool"
+    ]
+  },
+  {
+    "name": "GPT for Gmail™",
+    "description": "AI Email Assistant - ChatGPT (GPT-5), Gemini, Claude for GMAIL™ is AI email writer for Workspace™ 💌. Save hours of your time with AI-powered for one-click email writing, translation, rephrasing",
+    "link": "https://workspace.google.com/marketplace/app/gpt_for_gmail_ai_email_assistant_gemini/899305976589",
+    "logo_url": "https://lh3.googleusercontent.com/oc6gkSAm68-9uFBWuDzFXBzbPa-qU2ehPOXXMQ7WKqEZmzxE2ieb",
+    "pricing_type": "freemium",
+    "categories": [
+      "AI Tool"
+    ]
+  },
+  {
+    "name": "ChatPDF AI",
+    "description": "ChatPDF brings ChatGPT-style intelligence and PDF AI technology together for smarter document understanding. Summarize, chat, and analyze.",
+    "link": "https://www.chatpdf.com/",
+    "logo_url": "https://www.chatpdf.com/_static/og.png",
+    "pricing_type": "freemium",
+    "categories": [
+      "AI Tool"
+    ]
+  },
+  {
+    "name": "Mem",
+    "description": "Let AI organize your team's work—from meeting notes, projects, to knowledge bases. All instantly searchable and readily discoverable.",
+    "link": "https://mem.ai/",
+    "logo_url": "https://storage.googleapis.com/mem-public-assets/sq-f.jpg",
+    "pricing_type": "freemium",
+    "categories": [
+      "AI Tool"
+    ]
+  },
+  {
+    "name": "AI App Builder: Vibe Code Apps, AI Agents & Workflow Automations",
+    "description": "Vibe code AI apps, deploy agents, and automate workflows from one prompt. Living software with Workspace DNA - memory, intelligence, and execution in one platform. Start free.",
+    "link": "https://www.taskade.com/",
+    "logo_url": "https://www.taskade.com/static_images/taskade-genesis-mascot-2026.png",
+    "pricing_type": "freemium",
+    "categories": [
+      "AI Tool"
+    ]
+  },
+  {
+    "name": "Meet your AI team",
+    "description": "One tool that does it all. Search, generate, analyze, and chat—right inside Notion.",
+    "link": "https://www.notion.so/product/ai",
+    "logo_url": "https://www.notion.com/front-static/meta/custom-agents-og.png",
+    "pricing_type": "freemium",
+    "categories": [
+      "AI Tool"
+    ]
+  },
+  {
+    "name": "Nekton",
+    "description": "No description available. Please update manually.",
+    "link": "https://nekton.ai",
+    "logo_url": "",
+    "pricing_type": "freemium",
+    "categories": [
+      "AI Tool"
+    ]
+  },
+  {
+    "name": "Google NotebookLM",
+    "description": "Meet NotebookLM, the AI research tool and thinking partner that can analyze your sources, turn complexity into clarity and transform your content.",
+    "link": "https://notebooklm.google/",
+    "logo_url": "https://notebooklm.google/_/static/branding/v4/og/notebook_lm_share.png",
+    "pricing_type": "freemium",
+    "categories": [
+      "AI Tool"
+    ]
+  },
+  {
+    "name": "What is Open Notebook?",
+    "description": "Take Control of Your Research, Privately",
+    "link": "https://www.open-notebook.ai",
+    "logo_url": "",
+    "pricing_type": "freemium",
+    "categories": [
+      "AI Tool"
+    ]
+  },
+  {
+    "name": "Otter Meeting Agent",
+    "description": "Otter AI Meeting Agent supports real-time transcription, live chat, automated summaries, insights, and action items.",
+    "link": "https://otter.ai/",
+    "logo_url": "https://cdn.prod.website-files.com/618e9316785b3582a5178502/67dd5a945aeed07e329d4e10_og-image-otter-optim.jpg",
+    "pricing_type": "freemium",
+    "categories": [
+      "AI Tool"
+    ]
+  }
+]

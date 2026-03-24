@@ -6,11 +6,11 @@ from sqlalchemy import and_
 from fastapi import FastAPI
 
 from backend.database.database import get_db
-from backend.models import Bookmark, Like, Tool, Workflow
+from backend.models import Bookmark, Like, Tool
 from backend.auth import get_current_user
 from backend.schemas import BookmarkCreate, BookmarkOut, LikeCreate, LikeOut
 
-router = APIRouter(prefix="", tags=["Bookamrks and Likes"])
+router = APIRouter(prefix="", tags=["Bookmarks and Likes"])
 
 
 @router.post("/bookmarks/", response_model=BookmarkOut, status_code=status.HTTP_201_CREATED)
@@ -25,25 +25,24 @@ def create_bookmark(
     except ValueError as e:
         raise HTTPException(status_code=400, detail=str(e))
 
-    # Check uniqueness (user_id + tool_id + workflow_id)
+    # Check uniqueness (user_id + tool_id)
     existing = (
         db.query(Bookmark)
-        .filter_by(user_id=user_id, tool_id=payload.tool_id, workflow_id=payload.workflow_id)
+        .filter_by(user_id=user_id, tool_id=payload.tool_id)
         .first()
     )
     if existing:
         # idempotent: return existing bookmark
         return existing
 
-    # Optionally check referenced tool/workflow exists (recommended)
+    # Check referenced tool exists
     if payload.tool_id is not None:
         if not db.query(Tool).filter_by(id=payload.tool_id).first():
             raise HTTPException(status_code=404, detail="Tool not found")
-    if payload.workflow_id is not None:
-        if not db.query(Workflow).filter_by(id=payload.workflow_id).first():
-            raise HTTPException(status_code=404, detail="Workflow not found")
+    else:
+        raise HTTPException(status_code=400, detail="tool_id is required")
 
-    bookmark = Bookmark(user_id=user_id, tool_id=payload.tool_id, workflow_id=payload.workflow_id)
+    bookmark = Bookmark(user_id=user_id, tool_id=payload.tool_id)
     db.add(bookmark)
     db.commit()
     db.refresh(bookmark)
@@ -53,15 +52,12 @@ def create_bookmark(
 @router.get("/bookmarks/", response_model=List[BookmarkOut])
 def list_bookmarks(
     tool_id: Optional[int] = None,
-    workflow_id: Optional[int] = None,
     db: Session = Depends(get_db),                 
     user_id: str = Depends(get_current_user),
 ):
     q = db.query(Bookmark).filter(Bookmark.user_id == user_id)
     if tool_id is not None:
         q = q.filter(Bookmark.tool_id == tool_id)
-    if workflow_id is not None:
-        q = q.filter(Bookmark.workflow_id == workflow_id)
     items = q.order_by(Bookmark.created_at.desc()).all()
     return items
 
@@ -69,15 +65,14 @@ def list_bookmarks(
 @router.get("/bookmarks/check", response_model=dict)
 def check_bookmark_exists(
     tool_id: Optional[int] = None,
-    workflow_id: Optional[int] = None,
     db: Session = Depends(get_db),                 
     user_id: str = Depends(get_current_user),
 ):
-    if (tool_id is None) and (workflow_id is None):
-        raise HTTPException(status_code=400, detail="Provide tool_id or workflow_id")
+    if tool_id is None:
+        raise HTTPException(status_code=400, detail="Provide tool_id")
     exists = (
         db.query(Bookmark)
-        .filter_by(user_id=user_id, tool_id=tool_id, workflow_id=workflow_id)
+        .filter_by(user_id=user_id, tool_id=tool_id)
         .first()
         is not None
     )
@@ -108,13 +103,17 @@ def toggle_tool_bookmark(
     user_id: str = Depends(get_current_user),
 ):
     # if exists -> delete; else -> create
-    existing = db.query(Bookmark).filter_by(user_id=user_id, tool_id=tool_id, workflow_id=None).first()
+    existing = db.query(Bookmark).filter_by(user_id=user_id, tool_id=tool_id).first()
     if existing:
         db.delete(existing)
         db.commit()
         raise HTTPException(status_code=204)  # or return 204 with no content
+    
+    if not db.query(Tool).filter_by(id=tool_id).first():
+        raise HTTPException(status_code=404, detail="Tool not found")
+
     # create
-    bookmark = Bookmark(user_id=user_id, tool_id=tool_id, workflow_id=None)
+    bookmark = Bookmark(user_id=user_id, tool_id=tool_id)
     db.add(bookmark)
     db.commit()
     db.refresh(bookmark)
@@ -133,19 +132,18 @@ def create_like(
     except ValueError as e:
         raise HTTPException(status_code=400, detail=str(e))
 
-    existing = db.query(Like).filter_by(user_id=user_id, tool_id=payload.tool_id, workflow_id=payload.workflow_id).first()
+    existing = db.query(Like).filter_by(user_id=user_id, tool_id=payload.tool_id).first()
     if existing:
         return existing
 
-    # Optionally verify referenced object exists
+    # Verify referenced object exists
     if payload.tool_id is not None:
         if not db.query(Tool).filter_by(id=payload.tool_id).first():
             raise HTTPException(status_code=404, detail="Tool not found")
-    if payload.workflow_id is not None:
-        if not db.query(Workflow).filter_by(id=payload.workflow_id).first():
-            raise HTTPException(status_code=404, detail="Workflow not found")
+    else:
+        raise HTTPException(status_code=400, detail="tool_id is required")
 
-    like = Like(user_id=user_id, tool_id=payload.tool_id, workflow_id=payload.workflow_id)
+    like = Like(user_id=user_id, tool_id=payload.tool_id)
     db.add(like)
     db.commit()
     db.refresh(like)
@@ -155,15 +153,12 @@ def create_like(
 @router.get("/likes/", response_model=List[LikeOut])
 def list_likes(
     tool_id: Optional[int] = None,
-    workflow_id: Optional[int] = None,
     db: Session = Depends(get_db),                 
     user_id: str = Depends(get_current_user),
 ):
     q = db.query(Like).filter(Like.user_id == user_id)
     if tool_id is not None:
         q = q.filter(Like.tool_id == tool_id)
-    if workflow_id is not None:
-        q = q.filter(Like.workflow_id == workflow_id)
     items = q.order_by(Like.created_at.desc()).all()
     return items
 
@@ -171,13 +166,12 @@ def list_likes(
 @router.get("/likes/check", response_model=dict)
 def check_like_exists(
     tool_id: Optional[int] = None,
-    workflow_id: Optional[int] = None,
     db: Session = Depends(get_db),                 
     user_id: str = Depends(get_current_user),
 ):
-    if (tool_id is None) and (workflow_id is None):
-        raise HTTPException(status_code=400, detail="Provide tool_id or workflow_id")
-    exists = db.query(Like).filter_by(user_id=user_id, tool_id=tool_id, workflow_id=workflow_id).first() is not None
+    if tool_id is None:
+        raise HTTPException(status_code=400, detail="Provide tool_id")
+    exists = db.query(Like).filter_by(user_id=user_id, tool_id=tool_id).first() is not None
     return {"exists": exists}
 
 
@@ -204,12 +198,16 @@ def toggle_tool_like(
     db: Session = Depends(get_db),                 
     user_id: str = Depends(get_current_user),
 ):
-    existing = db.query(Like).filter_by(user_id=user_id, tool_id=tool_id, workflow_id=None).first()
+    existing = db.query(Like).filter_by(user_id=user_id, tool_id=tool_id).first()
     if existing:
         db.delete(existing)
         db.commit()
         raise HTTPException(status_code=204)
-    like = Like(user_id=user_id, tool_id=tool_id, workflow_id=None)
+        
+    if not db.query(Tool).filter_by(id=tool_id).first():
+        raise HTTPException(status_code=404, detail="Tool not found")
+        
+    like = Like(user_id=user_id, tool_id=tool_id)
     db.add(like)
     db.commit()
     db.refresh(like)

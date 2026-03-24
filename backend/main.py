@@ -9,7 +9,6 @@ import os
 from backend.routes.tools import router as tool_router
 from backend.routes.categories import router as category_router
 from backend.routes.admin import router as admin_router
-from backend.routes.workflows import router as workflow_router
 from backend.routes.bookmarks_likes import router as bookmark_like_router
 
 from .database.database import engine
@@ -37,7 +36,6 @@ app = FastAPI(
 app.include_router(tool_router)
 app.include_router(category_router)
 app.include_router(admin_router)
-app.include_router(workflow_router)
 app.include_router(bookmark_like_router)
 
 origin = ["http://localhost:5173",

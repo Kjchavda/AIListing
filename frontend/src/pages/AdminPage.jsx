@@ -15,7 +15,7 @@ import { useEffect, useState } from "react";
 import { useAuth, useUser } from "@clerk/clerk-react";
 import api from "../services/api";
 
-const ADMIN_USER_ID = "user_358uhfB0Qi2yobJpykzod0H7SaK";
+const ADMIN_USER_ID = import.meta.env.VITE_ADMIN_USER_ID;
 
 const AdminPage = () => {
   const [pendingTools, setPendingTools] = useState([]);
