@@ -39,7 +39,10 @@ app.include_router(admin_router)
 app.include_router(bookmark_like_router)
 
 origin = ["http://localhost:5173",
-        "http://127.0.0.1:5173"]
+        "http://127.0.0.1:5173",
+        "https://ai-listing-rho.vercel.app",
+        "ai-listing-git-main-kulanjaychavda-5616s-projects.vercel.app",
+        "ai-listing-34szdoen9-kulanjaychavda-5616s-projects.vercel.app"]
 
 # CORS middleware
 app.add_middleware(
