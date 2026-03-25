@@ -2,7 +2,8 @@ import json
 import os
 from dotenv import load_dotenv
 from sqlalchemy.orm import Session
-from backend.database.database import SessionLocal
+from backend.database.database import SessionLocal, engine
+from backend.models import Base
 from backend.models import Tool, Category
 from backend.schemas import PricingType
 
@@ -11,6 +12,7 @@ load_dotenv()
 ADMIN_USER_ID = os.getenv("ADMIN_USER_ID")
 
 def import_tools(json_filepath: str):
+    Base.metadata.create_all(bind=engine)
     db: Session = SessionLocal()
 
     try:

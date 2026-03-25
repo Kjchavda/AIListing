@@ -6,15 +6,19 @@ from sqlalchemy.orm import sessionmaker
 
 load_dotenv()
 
-DB_HOST = os.getenv("DATABASE_HOST")
-DB_PORT = os.getenv("DATABASE_PORT")
-DB_NAME = os.getenv("DATABASE_NAME")
-DB_USER = os.getenv("DATABASE_USER")
-DB_PASSWORD = os.getenv("DATABASE_PASSWORD")
+# DB_HOST = os.getenv("DATABASE_HOST")
+# DB_PORT = os.getenv("DATABASE_PORT")
+# DB_NAME = os.getenv("DATABASE_NAME")
+# DB_USER = os.getenv("DATABASE_USER")
+# DB_PASSWORD = os.getenv("DATABASE_PASSWORD")
+SQLALCHEMY_DATABASE_URL = os.getenv("DATABASE_URL")
 
-SQLALCHEMY_DATABASE_URL = (
-    f"postgresql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
-)
+# SQLALCHEMY_DATABASE_URL = (
+#     f"postgresql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
+# )
+
+if SQLALCHEMY_DATABASE_URL and SQLALCHEMY_DATABASE_URL.startswith("postgres://"):
+    SQLALCHEMY_DATABASE_URL = SQLALCHEMY_DATABASE_URL.replace("postgres://", "postgresql://", 1)
 
 engine = create_engine(SQLALCHEMY_DATABASE_URL)
 

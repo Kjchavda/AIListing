@@ -1,7 +1,7 @@
 import sys
 from sqlalchemy.orm import Session
-from database.database import SessionLocal, engine
-from models import Base, Tool, Category
+from backend.database.database import SessionLocal, engine
+from backend.models import Base, Tool, Category
 
 def create_categories(db: Session):
     """Create initial categories"""
