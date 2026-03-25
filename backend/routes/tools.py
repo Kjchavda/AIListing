@@ -1,10 +1,12 @@
 from fastapi import APIRouter, Depends, HTTPException, status, Query
+import requests
 from sqlalchemy.orm import Session
 from typing import List, Optional
 from backend.database.database import get_db
 from backend.models import Tool as ToolModel, Category as CategoryModel
-from backend.schemas import CompareRequest, Tool, ToolCreate, ToolUpdate, PricingType
+from backend.schemas import CompareRequest, Tool, ToolCreate, ToolUpdate, PricingType, ExtractRequest
 from backend.auth import get_current_user
+from backend.services import scrape_details
 
 
 router = APIRouter(prefix="/tools", tags=["tools"])
@@ -251,3 +253,19 @@ def compare_tools(req: CompareRequest, db: Session = Depends(get_db)):
         ordered_tools = []
 
     return ordered_tools
+
+@router.post("/extract")
+def extract_tool_info(req: ExtractRequest):
+    """Attempt to scrape meta tags from a URL to autofill the frontend form."""
+    try:
+        # Call your separated logic
+        data = scrape_details.extract_tool_metadata(str(req.url))
+        return data
+    
+    except PermissionError as e:
+        raise HTTPException(status_code=403, detail="Site blocks automatic scraping")
+    except requests.exceptions.RequestException as e:
+        raise HTTPException(status_code=400, detail="Could not reach site")
+    
+    except Exception as e:
+        raise HTTPException(status_code=500, detail="Failed to parse data")

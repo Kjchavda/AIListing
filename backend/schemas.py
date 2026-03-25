@@ -29,6 +29,9 @@ class CategoryWithToolCount(Category):
     tool_count: int = 0
 
 # Tool Schemas
+class ExtractRequest(BaseModel):
+    url: HttpUrl
+    
 class ToolBase(BaseModel):
     name: str
     description: str

@@ -7,7 +7,8 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, RotateCwSquareIcon } from "lucide-react";
+import { Loader2, Wand2 } from "lucide-react";
 
 const SubmitToolPage = () => {
   // 1. State for the form fields
@@ -24,6 +25,9 @@ const SubmitToolPage = () => {
   // 3. State for form feedback
   const [message, setMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+
+  // 3.2 extract state
+  const [isExtracting, setIsExtracting] = useState(false);
 
   // 4. React Router and Clerk hooks
   const navigate = useNavigate();
@@ -89,6 +93,40 @@ const SubmitToolPage = () => {
     }
   };
 
+  // 8. Handler for autofill
+  const handleAutofill = async () => {
+    if(!link){
+      setMessage("Please enter a url first");
+      return;
+    }
+
+    setIsExtracting(true);
+    setMessage(""); // clear msg
+
+    try{
+      const response = await api.post("/tools/extract", {url : link});
+      const { name, description, logo_url } = response.data;
+      
+      //update form fields
+      if (name) setName(name);
+      if (description) setDescription(description);
+      if (logo_url) setLogoUrl(logo_url);
+
+
+    } catch(error) {
+      console.error("Extraction failed: ", error);
+
+      //tell the user what happened
+      if(error.response?.status === 403){
+        setMessage("This website blocks automated scraping. Please fill in the details manually.");
+      } else {
+        setMessage("Could not fetch data from this URL. Please fill in the details manually.");
+      }
+    } finally {
+      setIsExtracting(false);
+    }
+  };
+
   return (
     <div className="container mx-auto p-4 max-w-2xl pt-24">
       <Button asChild variant="outline" className="mb-8">
@@ -106,40 +144,46 @@ const SubmitToolPage = () => {
         </div>
       ) : (
         <form onSubmit={handleSubmit} className="space-y-6 bg-card p-6 rounded-xl border border-border shadow-sm">
-          <div>
-            <Label htmlFor="name">Tool Name</Label>
-            <Input
-              id="name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              required
-              placeholder="e.g. Midjourney"
-              className="mt-1"
-            />
-          </div>
           
+          {/* 1. URL AND AUTOFILL BUTTON (Moved to the very top) */}
           <div>
-            <Label htmlFor="description">Full Description</Label>
-            <Textarea
-              id="description"
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-              required
-              placeholder="What does this AI tool do?"
-              className="mt-1 min-h-[100px]"
-            />
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-              <Label htmlFor="link">Website Link (URL)</Label>
+            <Label htmlFor="link">Website Link (URL)</Label>
+            <div className="flex gap-2 mt-1">
               <Input
                 id="link"
                 type="url"
-                placeholder="https://..."
+                placeholder="https://openai.com..."
                 value={link}
                 onChange={(e) => setLink(e.target.value)}
                 required
+                className="flex-1"
+              />
+              <Button 
+                type="button" 
+                variant="secondary" 
+                onClick={handleAutofill}
+                disabled={isExtracting || !link}
+                className="gap-2 shrink-0"
+              >
+                {isExtracting ? <Loader2 className="h-4 w-4 animate-spin" /> : <Wand2 className="h-4 w-4" />}
+                Autofill
+              </Button>
+            </div>
+            <p className="text-xs text-muted-foreground mt-2">
+              Enter a URL and click Autofill to magically grab the tool's details!
+            </p>
+          </div>
+
+          {/* 2. NAME AND LOGO (Put side-by-side) */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <Label htmlFor="name">Tool Name</Label>
+              <Input
+                id="name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                required
+                placeholder="e.g. Midjourney"
                 className="mt-1"
               />
             </div>
@@ -156,7 +200,21 @@ const SubmitToolPage = () => {
               />
             </div>
           </div>
+          
+          {/* 3. DESCRIPTION */}
+          <div>
+            <Label htmlFor="description">Full Description</Label>
+            <Textarea
+              id="description"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              required
+              placeholder="What does this AI tool do?"
+              className="mt-1 min-h-[100px]"
+            />
+          </div>
 
+          {/* 4. PRICING */}
           <div>
             <Label htmlFor="pricing_type">Pricing Model</Label>
             <select
@@ -172,6 +230,7 @@ const SubmitToolPage = () => {
             </select>
           </div>
 
+          {/* 5. CATEGORIES */}
           <div>
             <Label>Categories (select at least one)</Label>
             <div className="space-y-2 mt-2 p-4 border border-input rounded-md max-h-48 overflow-y-auto bg-background/50">
@@ -198,6 +257,7 @@ const SubmitToolPage = () => {
             </div>
           </div>
 
+          {/* 6. SUBMIT BUTTON */}
           <div className="pt-2">
             <button
               type="submit"
