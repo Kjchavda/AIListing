@@ -88,8 +88,13 @@ const SubmitToolPage = () => {
       }, 3000);
     } catch (error) {
       console.error("Failed to submit tool:", error);
+      if (error.response?.data?.detail) {
+        // Display the exact error from FastAPI
+        setMessage(error.response.data.detail);
+      }else{
       setMessage("Failed to submit tool. Please try again.");
       setIsLoading(false);
+      }
     }
   };
 

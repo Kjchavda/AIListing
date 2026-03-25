@@ -1,12 +1,11 @@
 # AI Toolkit Directory
 
 [![Live Deployment](https://img.shields.io/badge/Live_Deployment-Available_Now-success?style=for-the-badge)](https://your-deployment-link-here.com)
-[![Watch Demo](https://img.shields.io/badge/Video_Demo-Watch_on_YouTube-red?style=for-the-badge&logo=youtube)](https://youtube.com/your-video-link)
+[![Watch Demo](https://img.shields.io/badge/Demo-View_GIF_Below-blue?style=for-the-badge)](#-gallery)
 
 A full-stack, decoupled directory application that aggregates, categorizes, and serves modern AI tools. Built to solve the "Cold Start" problem of empty directories using custom data ingestion pipelines, and secured with Role-Based Access Control (RBAC).
 
 ![AI Toolkit Homepage Screenshot](docs/homepage-screenshot.png)
-*(Placeholder: Add a high-res screenshot of your homepage here)*
 
 ---
 
@@ -65,6 +64,12 @@ Designed a robust PostgreSQL schema using SQLAlchemy, featuring:
 <summary>Click to view Autofill Feature in Action</summary>
 <br>
 <img src="docs/autofill-demo.gif" alt="Autofill GIF">
+</details>
+
+<details>
+<summary>Click to view demo </summary>
+<br>
+<img src="docs/project-demo.gif" alt="Project demo GIF">
 </details>
 
 ---
