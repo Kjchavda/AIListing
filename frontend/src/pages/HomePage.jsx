@@ -1,10 +1,19 @@
-import { useEffect, useMemo, useState } from "react";
-import { Link , useSearchParams} from 'react-router-dom';
-
+import { useState } from "react";
+import { useNavigate } from 'react-router-dom';
 
 export default function HomePage() {
-  const [searchParams, setSearchParams] = useSearchParams();
   const [query, setQuery] = useState("");
+  const navigate = useNavigate();
+
+  const handleSearch = (e) => {
+    e.preventDefault(); // Prevents the page from reloading
+    if (query.trim()) {
+      // Navigate to categories page and pass the query in the URL
+      navigate(`/categories?search=${encodeURIComponent(query.trim())}`);
+    } else {
+      navigate(`/categories`);
+    }
+  };
 
   return (
     <main className="relative">
@@ -22,7 +31,11 @@ export default function HomePage() {
             </p>
 
             <div className="mt-8 mx-auto max-w-2xl">
-              <div className="flex items-stretch gap-2 rounded-full border border-white/10 bg-card/60 p-2 backdrop-blur-sm">
+              {/* Wrapped in a form so hitting 'Enter' submits the search! */}
+              <form 
+                onSubmit={handleSearch} 
+                className="flex items-stretch gap-2 rounded-full border border-white/10 bg-card/60 p-2 backdrop-blur-sm"
+              >
                 <input
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
@@ -30,16 +43,14 @@ export default function HomePage() {
                   className="flex-1 bg-transparent px-4 py-3 text-sm outline-none placeholder:text-muted-foreground"
                 />
                 <button
-                  onClick={() => {}}
+                  type="submit"
                   className="px-6 py-3 rounded-full text-sm font-semibold text-white bg-gradient-to-r from-[#370361] to-[#0b8793] hover:opacity-90 transition-opacity"
                 >
                   Search
                 </button>
-              </div>
+              </form>
             </div>
           </div>
-
-          
         </div>
       </section>
     </main>

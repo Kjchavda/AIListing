@@ -7,8 +7,8 @@ import { ToolCard } from "../components/ToolCard";
 
 export const CategoryPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const [query, setQuery] = useState("");
-  const [activeCat, setActiveCat] = useState(() => {
+// Initialize query from the URL if it exists, otherwise empty string
+  const [query, setQuery] = useState(() => searchParams.get("search") || "");  const [activeCat, setActiveCat] = useState(() => {
     const catIdfromParams = searchParams.get("category_id");
     if (!catIdfromParams) {
       return null;
@@ -96,7 +96,18 @@ export const CategoryPage = () => {
                 <div className="flex items-stretch gap-2 rounded-full border border-white/10 bg-card/60 p-2 backdrop-blur-sm">
                   <input
                     value={query}
-                    onChange={(e) => setQuery(e.target.value)}
+                    onChange={(e) => {
+                      setQuery(e.target.value);
+                      // Update the URL search param as they type
+                      setSearchParams((prev) => {
+                        if (e.target.value.trim()) {
+                          prev.set("search", e.target.value.trim());
+                        } else {
+                          prev.delete("search");
+                        }
+                        return prev;
+                      }, { replace: true });
+                    }}
                     placeholder="Search for tools like 'video editing' or 'ChatGPT'"
                     className="flex-1 bg-transparent px-4 py-3 text-sm outline-none placeholder:text-muted-foreground"
                   />
