@@ -1,6 +1,6 @@
 # AI Toolkit Directory
 
-[![Live Deployment](https://img.shields.io/badge/Live_Deployment-Available_Now-success?style=for-the-badge)](https://your-deployment-link-here.com)
+[![Live Deployment](https://img.shields.io/badge/Live_Deployment-Available_Now-success?style=for-the-badge)](https://ai-listing-rho.vercel.app/)
 [![Watch Demo](https://img.shields.io/badge/Demo-View_GIF_Below-blue?style=for-the-badge)](#-gallery)
 
 A full-stack, decoupled directory application that aggregates, categorizes, and serves modern AI tools. Built to solve the "Cold Start" problem of empty directories using custom data ingestion pipelines, and secured with Role-Based Access Control (RBAC).
